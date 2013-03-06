@@ -1,11 +1,10 @@
 ﻿using Expenses.Data.Contracts;
 using System;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
-namespace GenicDataMarket.Data
+namespace Expenses.Data
 {
     /// <summary>
     /// The EF-dependent, generic repository for data access

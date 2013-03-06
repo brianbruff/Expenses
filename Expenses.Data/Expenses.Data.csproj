@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFRepository.cs" />
+    <Compile Include="ExpensesDbContext.cs" />
     <Compile Include="Helpers\IRepositoryProvider.cs" />
     <Compile Include="Helpers\RepositoryFactories.cs" />
     <Compile Include="Helpers\RepositoryProvider.cs" />
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\Expenses.Data.Contracts\Expenses.Data.Contracts.csproj">
       <Project>{984ad243-1096-4fd2-a516-aafdce43e671}</Project>
       <Name>Expenses.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Expenses.Model\Expenses.Model.csproj">
+      <Project>{09707802-22D9-4C47-AE76-1BD2CBFC13C0}</Project>
+      <Name>Expenses.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

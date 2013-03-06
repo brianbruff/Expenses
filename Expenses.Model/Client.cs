@@ -10,6 +10,6 @@ namespace Expenses.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Project Project { get; set; }
+        virtual public List<Project> Projects { get; set; }
     }
 }

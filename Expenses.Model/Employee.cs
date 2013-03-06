@@ -10,7 +10,15 @@ namespace Expenses.Model
     public class Employee
     {
         public int Id { get; set; }
-        public Currency BaseCurrency { get; set; }
-        virtual public List<Expense> Expenses { get; set; }
+
+        public string Name { get; set; }
+
+        public virtual Currency BaseCurrency { get; set; }
+
+        public int BaseCurrencyId { get; set; }
+
+        public virtual List<Expense> Expenses { get; set; }
+
+        public virtual List<ExpenseReport> ExpenseReports { get; set; }
     }
 }

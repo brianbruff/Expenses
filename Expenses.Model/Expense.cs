@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Expenses.Model;
+using System.Data.Entity.ModelConfiguration;
 
 namespace Expenses.Model
 {
-    public class Expense
+    public class Expense : EntityTypeConfiguration<Expense>
     {
+
+        public Expense()
+        {
+           // Property(p => p.EmployeeId).IsRequired();
+        }
+
         public int Id { get; set; }
 
         public DateTime Date { get; set; }
@@ -19,6 +21,13 @@ namespace Expenses.Model
 
         public Currency Currency { get; set; }
 
-        public bool Submitted { get; set; }
+        public int CurrencyId { get; set; }
+
+        public ExpenseReport ExpenseReport { get; set; }
+        
+        public Employee Employee { get; set; }
+        
+        //public int EmployeeId { get; set; }
+
     }
 }

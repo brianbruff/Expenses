@@ -14,5 +14,9 @@ namespace Expenses.Model
 
         public string Description { get; set; }
 
+        public virtual Client Client { get; set; }
+
+        public int ClientId { get; set; }
+
     }
 }

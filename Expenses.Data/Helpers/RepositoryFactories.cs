@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using GenicDataMarket.Data;
 
 namespace Expenses.Data.Helpers
 {

@@ -11,7 +11,7 @@ namespace Expenses.Data
 {
     public class ExpensesDbContext : DbContext, IDatabaseInitializer<ExpensesDbContext>
     {
-        public ExpensesDbContext() : base("name=ExpensesConnection")
+        public ExpensesDbContext() : base("name=DefaultConnection")
         {
             
         }

@@ -28,7 +28,7 @@ namespace ExpensesTests
             context.Currencies.Add(new Currency { Code = "EUR" });
 
             // Put in some sample employees
-            context.Employees.Add(new Employee { BaseCurrency = context.Currencies.Local.First(), Name = "Brian Keating" });
+            context.Employees.Add(new Employee { BaseCurrency = context.Currencies.Local.First(), UserId = "brianbruff" });
 
             // Pub in some sample clients
             context.Clients.Add(new Client

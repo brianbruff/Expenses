@@ -108,3 +108,4 @@ Backup*/
 UpgradeLog*.XML
 bkexpenses.azurewebsites.net.PublishSettings
 Web.Release.Config
+*.pubxml

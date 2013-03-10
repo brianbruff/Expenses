@@ -109,3 +109,4 @@ UpgradeLog*.XML
 bkexpenses.azurewebsites.net.PublishSettings
 Web.Release.config
 *.pubxml
+AuthConfig.cs

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="EFRepository.cs" />
     <Compile Include="ExpensesDbContext.cs" />
+    <Compile Include="ExpensesUow.cs" />
     <Compile Include="Helpers\IRepositoryProvider.cs" />
     <Compile Include="Helpers\RepositoryFactories.cs" />
     <Compile Include="Helpers\RepositoryProvider.cs" />

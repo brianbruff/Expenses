@@ -1,21 +1,16 @@
-﻿using System;
-using System.Data;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Expenses.Model;
 using Expenses.Web.Filters;
-using Expenses.Web.Models;
 
-namespace Expenses.Web.Controllers
+namespace Expenses.Web.Controllers.Api
 {
     [Authorize]
     [ValidateHttpAntiForgeryToken]
     public class ExpenseController : ApiController
     {
-        
-
         // PUT api/Todo/5
         public HttpResponseMessage PutTodoItem(int id, ExpenseDto todoItemDto)
         {

@@ -1,9 +1,9 @@
 ﻿using System;
-//using System.Data.Entity.ModelConfiguration;
+
 
 namespace Expenses.Model
 {
-    public class Expense// : EntityTypeConfiguration<Expense>
+    public class Expense
     {   
         public int Id { get; set; }
 

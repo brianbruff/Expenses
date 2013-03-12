@@ -7,12 +7,13 @@ using Expenses.Model;
 
 namespace Expenses.Data.Contracts
 {
-    interface IExpensesUow
+    public interface IExpensesUow
     {
         // Save pending changes to the data store.
         void Commit();
 
         // Repositories
         IRepository<Employee> Employees { get; }
+        IRepository<Expense> Expenses { get; }
     }
 }

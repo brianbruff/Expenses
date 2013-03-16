@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Expenses.Data;
 using Expenses.Data.Contracts;
 using Expenses.Model;
 
@@ -12,6 +13,11 @@ namespace Expenses.Web.Controllers.Api
     //[ValidateHttpAntiForgeryToken]
     public class ExpensesController : ApiControllerBase
     {
+        public ExpensesController(IExpensesUow uow)
+        {
+            Uow = uow;
+        }
+
         public IQueryable<Expense> GetExpenses()
         {
             return Uow.Expenses.GetAll();
@@ -19,6 +25,7 @@ namespace Expenses.Web.Controllers.Api
 
         public IQueryable<Expense> GetExpense(int id)
         {
+
             var expense = Uow.Expenses.Include(e => e.Employee).GetById(id);
             if (expense == null)
             {

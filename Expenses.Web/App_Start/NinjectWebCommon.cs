@@ -1,3 +1,4 @@
+using System.Web.Http;
 using Expenses.Data;
 using Expenses.Data.Contracts;
 using Expenses.Data.Helpers;
@@ -27,6 +28,7 @@ namespace Expenses.Web.App_Start
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
+            GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(bootstrapper.Kernel);     
         }
         
         /// <summary>

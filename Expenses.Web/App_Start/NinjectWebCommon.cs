@@ -1,5 +1,6 @@
 using Expenses.Data;
 using Expenses.Data.Contracts;
+using Expenses.Data.Helpers;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Expenses.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Expenses.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -56,6 +57,8 @@ namespace Expenses.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<RepositoryFactories>().To<RepositoryFactories>().InSingletonScope();
+            kernel.Bind<IRepositoryProvider>().To<RepositoryProvider>();
             kernel.Bind<IExpensesUow>().To<ExpensesUow>();
         }        
     }

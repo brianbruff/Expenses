@@ -4,8 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Expenses.Data;
 using Expenses.Model;
+using Expenses.Web.Models;
 
 namespace ExpensesTests
 {

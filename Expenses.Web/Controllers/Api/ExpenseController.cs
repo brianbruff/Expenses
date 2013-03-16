@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -8,9 +9,30 @@ using Expenses.Web.Filters;
 namespace Expenses.Web.Controllers.Api
 {
     [Authorize]
-    [ValidateHttpAntiForgeryToken]
-    public class ExpenseController : ApiController
+    //[ValidateHttpAntiForgeryToken]
+    public class ExpenseController : ApiControllerBase
     {
+        public IQueryable<Expense> GetExpenses()
+        {
+            return Uow.Expenses.GetAll();
+        }
+
+        public IQueryable<Expense> GetExpense(int id)
+        {
+            var expense = Uow.Expenses.Include(e => e.Employee).GetById(id);
+            if (expense == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            if (expense.Employee.UserId != User.Identity.Name)
+            {
+                // Trying to modify a record that does not belong to the user
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
+            }
+            return null;
+        }
+
         // PUT api/Todo/5
         public HttpResponseMessage PutTodoItem(int id, ExpenseDto todoItemDto)
         {

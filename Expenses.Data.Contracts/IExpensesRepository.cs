@@ -11,5 +11,7 @@ namespace Expenses.Data.Contracts
     public interface IExpensesRepository : IRepository<Expense>
     {
         //Publisher GetByCode(string code);
+        
+        
     }
 }

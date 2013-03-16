@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Expenses.Web.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExpensesTests
@@ -15,7 +16,7 @@ namespace ExpensesTests
         public void TestCreate()
         {
             Database.SetInitializer(new BasicContentInitializer());
-            using (var db = new Expenses.Data.ExpensesDbContext())
+            using (var db = new ExpensesDbContext())
             {
                 var clients = db.Clients;
                 Assert.AreEqual(1, db.Clients.Count(), "We should have one client");
@@ -40,7 +41,7 @@ namespace ExpensesTests
             }
         }
 
-        private Expenses.Data.ExpensesDbContext _ctx = new Expenses.Data.ExpensesDbContext();
+        private ExpensesDbContext _ctx = new ExpensesDbContext();
         
     }
 }

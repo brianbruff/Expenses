@@ -1,4 +1,5 @@
-﻿using Expenses.Data.Contracts;
+﻿using System.Linq.Expressions;
+using Expenses.Data.Contracts;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -77,6 +78,19 @@ namespace Expenses.Data
             var entity = GetById(id);
             if (entity == null) return; // not found; assume already deleted.
             Delete(entity);
+        }
+
+        public IRepository<T> Include<TProperty>(Expression<Func<T, TProperty>> path)
+        {
+            DbSet.Include(path);
+            return this;    
+        }
+
+        public IRepository<T> Include(string table)
+        {
+            DbSet.Include(c => c.ToString());
+            DbSet.Include(table);
+            return this;
         }
     }
 }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using Expenses.Model;
 
-namespace Expenses.Data
+namespace Expenses.Web.Models
 {
     public class ExpensesDbContext : DbContext
     {
@@ -28,7 +22,6 @@ namespace Expenses.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
             modelBuilder.Entity<Expense>().HasRequired(e => e.Employee).WithMany(t => t.Expenses).WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Expenses.Data.Contracts
 {
@@ -10,5 +12,8 @@ namespace Expenses.Data.Contracts
         void Update(T entity);
         void Delete(T entity);
         void Delete(int id);
+
+        IRepository<T> Include(string table);
+        IRepository<T> Include<TProperty>(Expression<Func<T, TProperty>> path);
     }
 }

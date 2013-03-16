@@ -6,14 +6,11 @@ namespace Expenses.Web.Controllers.Api
 {
     public class ApiControllerBase : ApiController
     {
-        // don't want to have new constructor in each derived class but can't currently see a way around without coupling in the concret classs
-        // 
-
-        //public ApiControllerBase()
-        //{
-        //    var resolver = GlobalConfiguration.Configuration.DependencyResolver;
-        //    Uow = resolver.GetService(typeof(ExpensesUow)) as ExpensesUow;
-        //}
+        public ApiControllerBase()
+        {
+            var resolver = GlobalConfiguration.Configuration.DependencyResolver;
+            Uow = resolver.GetService(typeof(IExpensesUow)) as IExpensesUow;
+        }
 
         
         protected IExpensesUow Uow { get; set; }

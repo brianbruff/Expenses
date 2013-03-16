@@ -13,7 +13,7 @@ namespace Expenses.Data.Contracts
         void Delete(T entity);
         void Delete(int id);
 
-        IRepository<T> Include(string table);
+        
         IRepository<T> Include<TProperty>(Expression<Func<T, TProperty>> path);
     }
 }

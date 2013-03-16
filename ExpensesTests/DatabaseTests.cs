@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Expenses.Data;
 using Expenses.Web.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -13,10 +13,10 @@ namespace Expenses.Web.Controllers.Api
     //[ValidateHttpAntiForgeryToken]
     public class ExpensesController : ApiControllerBase
     {
-        public ExpensesController(IExpensesUow uow)
-        {
-            Uow = uow;
-        }
+        //public ExpensesController(IExpensesUow uow)
+        //{
+        //    Uow = uow;
+        //}
 
         public IQueryable<Expense> GetExpenses()
         {

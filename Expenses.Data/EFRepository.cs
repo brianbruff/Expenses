@@ -80,17 +80,17 @@ namespace Expenses.Data
             Delete(entity);
         }
 
+        /// <summary>
+        /// Added support to include lazy loaded virtual objects.
+        /// </summary>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public IRepository<T> Include<TProperty>(Expression<Func<T, TProperty>> path)
         {
             DbSet.Include(path);
             return this;    
         }
-
-        public IRepository<T> Include(string table)
-        {
-            DbSet.Include(c => c.ToString());
-            DbSet.Include(table);
-            return this;
-        }
+        
     }
 }

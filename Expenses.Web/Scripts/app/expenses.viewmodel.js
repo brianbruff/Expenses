@@ -1,16 +1,16 @@
 ﻿window.expensesApp.ExpenseReportViewModel = (function (ko, datacontext) {
-    /// <field name="ExpenseReports" value="[new datacontext.ExpenseReport()]"></field>
+    /// <field name="expenseReports" value="[new datacontext.expenseReport()]"></field>
     var expenseReports = ko.observableArray(),
         error = ko.observable(),
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();
             expenseReport.isEditingListTitle(true);
-            datacontext.saveNewExpenseReport(ExpenseReport)
+            datacontext.saveNewExpenseReport(expenseReport)
                 .then(addSucceeded)
                 .fail(addFailed);
 
             function addSucceeded() {
-                showExpenseReport(ExpenseReport);
+                showExpenseReport(expenseReport);
             }
             function addFailed() {
                 error("Save of new ExpenseReport failed");

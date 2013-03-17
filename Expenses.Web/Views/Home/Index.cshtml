@@ -20,9 +20,9 @@
 {
     <p class="error" data-bind="text: error"></p>
     <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
-    <button data-bind="click: addExpenseReport">Add Todo list</button>
+    <button data-bind="click: addExpenseReport">Add Expense</button>
 
-    <section id="lists" data-bind="foreach: ExpenseReports, visible: ExpenseReports().length > 0">
+    <section id="lists" data-bind="foreach: expenseReports, visible: expenseReports().length > 0">
         <article class="ExpenseReport">
             <header>
                 <form data-bind="validate: true">
@@ -41,7 +41,7 @@
                 </li>
             </ul>
 
-            <form data-bind="submit: addTodo">
+            <form data-bind="submit: addExpense">
                 <input class="addTodo" type="text" data-bind="value: newTodoTitle, placeholder: 'Type here to add', blurOnEnter: true, event: { blur: addTodo }" />
             </form>
 

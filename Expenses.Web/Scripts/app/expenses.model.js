@@ -1,6 +1,6 @@
 ﻿(function (ko, datacontext) {
     datacontext.expense = expense;
-    datacontext.ExpenseReport = ExpenseReport;
+    datacontext.expenseReport = expenseReport;
 
     function expense(data) {
         var self = this;
@@ -10,7 +10,7 @@
         self.expenseId = data.expenseId;
         self.title = ko.observable(data.title);
         self.isDone = ko.observable(data.isDone);
-        self.ExpenseReportId = data.ExpenseReportId;
+        self.expenseReportId = data.expenseReportId;
 
         // Non-persisted properties
         self.errorMessage = ko.observable();
@@ -31,7 +31,7 @@
         data = data || {};
 
         // Persisted properties
-        self.expenseReportId = data.ExpenseReportId;
+        self.expenseReportId = data.expenseReportId;
         self.userId = data.userId || "to be replaced";
         self.title = ko.observable(data.title || "My todos");
         self.todos = ko.observableArray(importExpenses(data.todos));
@@ -62,7 +62,7 @@
                     return datacontext.createExpense(expenseData);
                 });
     }
-    ExpenseReport.prototype.addTodo = function () {
+    expenseReport.prototype.addExpense = function () {
         var self = this;
         if (self.newTodoTitle()) { // need a title to save
             var expense = datacontext.createExpense(

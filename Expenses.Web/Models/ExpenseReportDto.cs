@@ -6,7 +6,7 @@ namespace Expenses.Web.Models
 {
     public class ExpenseReportDto
     {
-        public int Id { get; set; }
+        public int ExpenseReportId { get; set; }
 
         public string Name { get; set; }
 
@@ -18,7 +18,7 @@ namespace Expenses.Web.Models
         {
             return new ExpenseReport
                        {
-                           Id = Id,
+                           Id = ExpenseReportId,
                            Name = Name,
                            Date = Date
                        };

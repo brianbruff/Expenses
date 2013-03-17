@@ -18,7 +18,7 @@ namespace Expenses.Web.Controllers.Api
         public IQueryable<ExpenseReportDto> GetExpenseReports()
         {
             return Uow.ExpenseReports.GetAll().Where(r => r.Employee.UserId == User.Identity.Name)
-                .Select(x => new ExpenseReportDto{ Id = x.Id, Name = x.Name, Date = x.Date});
+                .Select(x => new ExpenseReportDto{ ExpenseReportId = x.Id, Name = x.Name, Date = x.Date});
         }
 
         public IQueryable<Expense> GetExpenseReport(int id)

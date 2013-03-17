@@ -34,7 +34,7 @@ window.expensesApp.datacontext = (function () {
         return new datacontext.expense(data); // expense is injected by todo.model.js
     }
     function createExpenseReport(data) {
-        return new datacontext.ExpenseReport(data); // ExpenseReport is injected by todo.model.js
+        return new datacontext.expenseReport(data); // ExpenseReport is injected by todo.model.js
     }
     function saveNewExpense(expense) {
         clearErrorMessage(expense);
@@ -50,7 +50,7 @@ window.expensesApp.datacontext = (function () {
         clearErrorMessage(expenseReport);
         return ajaxRequest("post", expenseReportUrl(), expenseReport)
             .done(function (result) {
-                expenseReport.ExpenseReportId = result.expenseReportId;
+                expenseReport.expenseReportId = result.expenseReportId;
                 expenseReport.userId = result.userId;
             })
             .fail(function () {
@@ -64,7 +64,7 @@ window.expensesApp.datacontext = (function () {
             });
     }
     function deleteExpenseReport(expenseReport) {
-        return ajaxRequest("delete", expenseReportUrl(ExpenseReport.ExpenseReportId))
+        return ajaxRequest("delete", expenseReportUrl(expenseReport.expenseReportId))
             .fail(function () {
                 expenseReport.errorMessage("Error removing todo list.");
             });
@@ -77,8 +77,8 @@ window.expensesApp.datacontext = (function () {
             });
     }
     function saveChangedExpenseReport(expenseReport) {
-        clearErrorMessage(ExpenseReport);
-        return ajaxRequest("put", expenseReportUrl(ExpenseReport.ExpenseReportId), ExpenseReport, "text")
+        clearErrorMessage(expenseReport);
+        return ajaxRequest("put", expenseReportUrl(expenseReport.expenseReportId), expenseReport, "text")
             .fail(function () {
                 expenseReport.errorMessage("Error updating the todo list title. Please make sure it is non-empty.");
             });

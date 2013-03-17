@@ -1,10 +1,10 @@
 ﻿window.expensesApp.ExpenseReportViewModel = (function (ko, datacontext) {
     /// <field name="ExpenseReports" value="[new datacontext.ExpenseReport()]"></field>
-    var ExpenseReports = ko.observableArray(),
+    var expenseReports = ko.observableArray(),
         error = ko.observable(),
         addExpenseReport = function () {
-            var ExpenseReport = datacontext.createExpenseReport();
-            ExpenseReport.isEditingListTitle(true);
+            var expenseReport = datacontext.createExpenseReport();
+            expenseReport.isEditingListTitle(true);
             datacontext.saveNewExpenseReport(ExpenseReport)
                 .then(addSucceeded)
                 .fail(addFailed);
@@ -16,23 +16,23 @@
                 error("Save of new ExpenseReport failed");
             }
         },
-        showExpenseReport = function (ExpenseReport) {
-            ExpenseReports.unshift(ExpenseReport); // Insert new ExpenseReport at the front
+        showExpenseReport = function (expenseReport) {
+            expenseReports.unshift(expenseReport); // Insert new ExpenseReport at the front
         },
-        deleteExpenseReport = function (ExpenseReport) {
-            ExpenseReports.remove(ExpenseReport);
-            datacontext.deleteExpenseReport(ExpenseReport)
+        deleteExpenseReport = function (expenseReport) {
+            expenseReports.remove(expenseReport);
+            datacontext.deleteExpenseReport(expenseReport)
                 .fail(deleteFailed);
 
             function deleteFailed() {
-                showExpenseReport(ExpenseReport); // re-show the restored list
+                showExpenseReport(expenseReport); // re-show the restored list
             }
         };
 
-    datacontext.getExpenseReports(ExpenseReports, error); // load ExpenseReports
+    datacontext.getExpenseReports(expenseReports, error); // load ExpenseReports
 
     return {
-        ExpenseReports: ExpenseReports,
+        expenseReports: expenseReports,
         error: error,
         addExpenseReport: addExpenseReport,
         deleteExpenseReport: deleteExpenseReport

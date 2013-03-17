@@ -26,12 +26,12 @@
         self.toJson = function () { return ko.toJSON(self) };
     };
 
-    function ExpenseReport(data) {
+    function expenseReport(data) {
         var self = this;
         data = data || {};
 
         // Persisted properties
-        self.ExpenseReportId = data.ExpenseReportId;
+        self.expenseReportId = data.ExpenseReportId;
         self.userId = data.userId || "to be replaced";
         self.title = ko.observable(data.title || "My todos");
         self.todos = ko.observableArray(importExpenses(data.todos));
@@ -68,7 +68,7 @@
             var expense = datacontext.createExpense(
                 {
                     title: self.newTodoTitle(),
-                    ExpenseReportId: self.ExpenseReportId
+                    expenseReportId: self.expenseReportId
                 });
             self.todos.push(expense);
             datacontext.saveNewExpense(expense);

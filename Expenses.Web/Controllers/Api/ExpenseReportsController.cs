@@ -6,19 +6,19 @@ using System.Web.Http;
 using Expenses.Data;
 using Expenses.Data.Contracts;
 using Expenses.Model;
+using Expenses.Web.Filters;
 using Expenses.Web.Models;
 
 namespace Expenses.Web.Controllers.Api
 {
     [Authorize]
-    //[ValidateHttpAntiForgeryToken]
+    [ValidateHttpAntiForgeryToken]
     public class ExpenseReportsController : ApiControllerBase
     {
         public IQueryable<ExpenseReportDto> GetExpenseReports()
         {
-            var result = Uow.ExpenseReports.GetAll().Select(x => new ExpenseReportDto{ Id = x.Id, Name = x.Name, Date = x.Date});
-            var t = result.ToList();
-            return result;
+            return Uow.ExpenseReports.GetAll().Where(r => r.Employee.UserId == User.Identity.Name)
+                .Select(x => new ExpenseReportDto{ Id = x.Id, Name = x.Name, Date = x.Date});
         }
 
         public IQueryable<Expense> GetExpenseReport(int id)

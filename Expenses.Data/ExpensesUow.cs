@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Expenses.Data.Contracts;
+﻿using Expenses.Data.Contracts;
 using Expenses.Data.Helpers;
 using Expenses.Model;
+using System;
 
 namespace Expenses.Data
 {
@@ -21,8 +17,12 @@ namespace Expenses.Data
         }
 
 
+        // Repositories
+        public IRepository<Currency> Currencies { get { return GetStandardRepo<Currency>(); } }
+        public IRepository<ExpenseType> ExpenseTypes { get { return GetStandardRepo<ExpenseType>(); } }
+        public IRepository<Employee> Employees { get { return GetStandardRepo<Employee>(); } }
         public IRepository<Expense> Expenses { get { return GetStandardRepo<Expense>(); } }
-
+        public IRepository<ExpenseReport> ExpenseReports { get { return GetStandardRepo<ExpenseReport>(); } }
        
 
         /// <summary>

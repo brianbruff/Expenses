@@ -19,7 +19,7 @@ namespace Expenses.Model
 
         public int BaseCurrencyId { get; set; }
 
-        public virtual List<Expense> Expenses { get; set; }
+        //public virtual List<Expense> Expenses { get; set; }
 
         public virtual List<ExpenseReport> ExpenseReports { get; set; }
     }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
+using Expenses.Data.Contracts;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Expenses.Web.Filters;
@@ -12,15 +14,15 @@ using Expenses.Web.Models;
 
 namespace Expenses.Web.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
         // POST: /Account/JsonLogin
 
-        [AllowAnonymous]
-        [HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
         public JsonResult JsonLogin(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -43,7 +45,7 @@ namespace Expenses.Web.Controllers
         //
         // POST: /Account/LogOff
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -54,8 +56,8 @@ namespace Expenses.Web.Controllers
 
         //
         // POST: /Account/JsonRegister
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult JsonRegister(RegisterModel model, string returnUrl)
         {
@@ -88,13 +90,32 @@ namespace Expenses.Web.Controllers
         /// <param name="userName"></param>
         private static void InitiateDatabaseForNewUser(string userName)
         {
+            var resolver = GlobalConfiguration.Configuration.DependencyResolver;
+            var uow = (IExpensesUow)resolver.GetService(typeof(IExpensesUow));
+
+            // Get the Euro currency
+            var euro = uow.Currencies.GetAll().First(c => c.Code == "EUR");
+
+            // Create the employee record
+            var employee = new Model.Employee { BaseCurrency = euro, UserId = userName };
+            uow.Employees.Add(employee);
+            uow.Commit();
+
+            // Create the blank report, all new expenses are in this report
+            var report = new Model.ExpenseReport { Employee = employee, Name = "<New Report>" };
+            uow.ExpenseReports.Add(report);
+            uow.Commit();
+
+            // todo: remove this in production
+            report.Expenses.Add(new Model.Expense { Currency = euro, Date = DateTime.Now.Date, Description = "Taxi DGL => ENI", Type = uow.ExpenseTypes.GetById(1) });
+            uow.Commit();
             
         }
 
         //
         // POST: /Account/Disassociate
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
@@ -138,7 +159,7 @@ namespace Expenses.Web.Controllers
         //
         // POST: /Account/Manage
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
@@ -201,8 +222,8 @@ namespace Expenses.Web.Controllers
         //
         // POST: /Account/ExternalLogin
 
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
@@ -212,7 +233,7 @@ namespace Expenses.Web.Controllers
         //
         // GET: /Account/ExternalLoginCallback
 
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
             AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
@@ -245,8 +266,8 @@ namespace Expenses.Web.Controllers
         //
         // POST: /Account/ExternalLoginConfirmation
 
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
@@ -293,13 +314,13 @@ namespace Expenses.Web.Controllers
         //
         // GET: /Account/ExternalLoginFailure
 
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         [ChildActionOnly]
         public ActionResult ExternalLoginsList(string returnUrl)
         {

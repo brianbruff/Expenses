@@ -6,6 +6,7 @@ using System.Web.Http;
 using Expenses.Data;
 using Expenses.Data.Contracts;
 using Expenses.Model;
+using Expenses.Web.Models;
 
 namespace Expenses.Web.Controllers.Api
 {
@@ -13,11 +14,6 @@ namespace Expenses.Web.Controllers.Api
     //[ValidateHttpAntiForgeryToken]
     public class ExpensesController : ApiControllerBase
     {
-        //public ExpensesController(IExpensesUow uow)
-        //{
-        //    Uow = uow;
-        //}
-
         public IQueryable<Expense> GetExpenses()
         {
             return Uow.Expenses.GetAll();
@@ -25,113 +21,113 @@ namespace Expenses.Web.Controllers.Api
 
         public IQueryable<Expense> GetExpense(int id)
         {
-
-            var expense = Uow.Expenses.Include(e => e.Employee).GetById(id);
+            var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
             if (expense == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            if (expense.Employee.UserId != User.Identity.Name)
-            {
-                // Trying to modify a record that does not belong to the user
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
-            }
+            
+            //if (expense.Employee.UserId != User.Identity.Name)
+            //{
+            //    // Trying to modify a record that does not belong to the user
+            //    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
+            //}
             return null;
         }
 
         // PUT api/Todo/5
-        public HttpResponseMessage PutTodoItem(int id, ExpenseDto todoItemDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //public HttpResponseMessage PutExpense(int id, ExpenseDto expenseDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            if (id != todoItemDto.Id)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
+        //    if (id != expenseDto.Id)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //    }
 
-            //TodoItem todoItem = todoItemDto.ToEntity();
-            //TodoList todoList = db.TodoLists.Find(todoItem.TodoListId);
-            //if (todoList == null)
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.NotFound);
-            //}
+        //    //Expense expense = expenseDto.ToEntity();
+        //    //ExpenseReport ExpenseReport = db.ExpenseReports.Find(expense.ExpenseReportId);
+        //    //if (ExpenseReport == null)
+        //    //{
+        //    //    return Request.CreateResponse(HttpStatusCode.NotFound);
+        //    //}
 
-            //if (todoList.UserId != User.Identity.Name)
-            //{
-            //    // Trying to modify a record that does not belong to the user
-            //    return Request.CreateResponse(HttpStatusCode.Unauthorized);
-            //}
+        //    //if (ExpenseReport.UserId != User.Identity.Name)
+        //    //{
+        //    //    // Trying to modify a record that does not belong to the user
+        //    //    return Request.CreateResponse(HttpStatusCode.Unauthorized);
+        //    //}
 
-            // Need to detach to avoid duplicate primary key exception when SaveChanges is called
-            //db.Entry(todoList).State = EntityState.Detached;
-            //db.Entry(todoItem).State = EntityState.Modified;
+        //    // Need to detach to avoid duplicate primary key exception when SaveChanges is called
+        //    //db.Entry(ExpenseReport).State = EntityState.Detached;
+        //    //db.Entry(expense).State = EntityState.Modified;
 
-            try
-            {
-                //db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
-            }
+        //    try
+        //    {
+        //        //db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        //    }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
+        //    return Request.CreateResponse(HttpStatusCode.OK);
+        //}
 
-        // POST api/Todo
-        public HttpResponseMessage PostTodoItem(ExpenseDto todoItemDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //// POST api/Todo
+        //public HttpResponseMessage PostExpense(ExpenseDto expenseDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            //TodoList todoList = db.TodoLists.Find(todoItemDto.TodoListId);
-            //if (todoList == null)
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.NotFound);
-            //}
+        //    //ExpenseReport ExpenseReport = db.ExpenseReports.Find(expenseDto.ExpenseReportId);
+        //    //if (ExpenseReport == null)
+        //    //{
+        //    //    return Request.CreateResponse(HttpStatusCode.NotFound);
+        //    //}
 
-            //if (todoList.UserId != User.Identity.Name)
-            //{
-            //    // Trying to add a record that does not belong to the user
-            //    return Request.CreateResponse(HttpStatusCode.Unauthorized);
-            //}
+        //    //if (ExpenseReport.UserId != User.Identity.Name)
+        //    //{
+        //    //    // Trying to add a record that does not belong to the user
+        //    //    return Request.CreateResponse(HttpStatusCode.Unauthorized);
+        //    //}
 
-            //TodoItem todoItem = todoItemDto.ToEntity();
+        //    //Expense expense = expenseDto.ToEntity();
 
-            //// Need to detach to avoid loop reference exception during JSON serialization
-            //db.Entry(todoList).State = EntityState.Detached;
-            //db.TodoItems.Add(todoItem);
-            //db.SaveChanges();
-            //todoItemDto.TodoItemId = todoItem.TodoItemId;
+        //    //// Need to detach to avoid loop reference exception during JSON serialization
+        //    //db.Entry(ExpenseReport).State = EntityState.Detached;
+        //    //db.Expenses.Add(expense);
+        //    //db.SaveChanges();
+        //    //expenseDto.ExpenseId = expense.ExpenseId;
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, todoItemDto);
-            //response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = todoItemDto.TodoItemId }));
-            return response;
-        }
+        //    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, expenseDto);
+        //    //response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = expenseDto.ExpenseId }));
+        //    return response;
+        //}
 
         // DELETE api/Todo/5
-        //public HttpResponseMessage DeleteTodoItem(int id)
+        //public HttpResponseMessage DeleteExpense(int id)
         //{
-            //TodoItem todoItem = db.TodoItems.Find(id);
-            //if (todoItem == null)
+            //Expense expense = db.Expenses.Find(id);
+            //if (expense == null)
             //{
             //    return Request.CreateResponse(HttpStatusCode.NotFound);
             //}
 
-            //if (db.Entry(todoItem.TodoList).Entity.UserId != User.Identity.Name)
+            //if (db.Entry(expense.ExpenseReport).Entity.UserId != User.Identity.Name)
             //{
             //    // Trying to delete a record that does not belong to the user
             //    return Request.CreateResponse(HttpStatusCode.Unauthorized);
             //}
 
-            //TodoItemDto todoItemDto = new TodoItemDto(todoItem);
-            //db.TodoItems.Remove(todoItem);
+            //ExpenseDto expenseDto = new ExpenseDto(expense);
+            //db.Expenses.Remove(expense);
 
             //try
             //{
@@ -142,7 +138,7 @@ namespace Expenses.Web.Controllers.Api
             //    return Request.CreateResponse(HttpStatusCode.InternalServerError);
             //}
 
-        //    return Request.CreateResponse(HttpStatusCode.OK, todoItemDto);
+        //    return Request.CreateResponse(HttpStatusCode.OK, expenseDto);
         //}
 
         protected override void Dispose(bool disposing)

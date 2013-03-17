@@ -13,7 +13,7 @@
     <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
     <p>@Html.ActionLink("Back to My Todo List", "Index", "Home")</p>
 
-    <section class="todoList">
+    <section class="ExpenseReport">
     @if (ViewBag.HasLocalPassword)
     {
         @Html.Partial("_ChangePasswordPartial")
@@ -24,7 +24,7 @@
     }
     </section>
 
-    <section class="todoList" id="externalLogins">
+    <section class="ExpenseReport" id="externalLogins">
         @Html.Action("RemoveExternalLogins")
 
         <h3>Add an external login</h3>

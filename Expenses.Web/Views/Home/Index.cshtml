@@ -1,6 +1,6 @@
 ﻿@model Expenses.Web.Models.LoginModel
 @{
-    ViewBag.Title = "Outstanding Expenses";
+    ViewBag.Title = "Expenses";
 }
 @functions{
     public string GetAntiForgeryToken()
@@ -20,22 +20,22 @@
 {
     <p class="error" data-bind="text: error"></p>
     <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
-    <button data-bind="click: addTodoList">Add Todo list</button>
+    <button data-bind="click: addExpenseReport">Add Todo list</button>
 
-    <section id="lists" data-bind="foreach: todoLists, visible: todoLists().length > 0">
-        <article class="todoList">
+    <section id="lists" data-bind="foreach: ExpenseReports, visible: ExpenseReports().length > 0">
+        <article class="ExpenseReport">
             <header>
                 <form data-bind="validate: true">
                     <input class="required" data-bind="value: title, selected: isEditingListTitle, blurOnEnter: true" />
                 </form>
             </header>
 
-            <a href="#" class="deletelist" data-bind="click: $parent.deleteTodoList">X</a>
+            <a href="#" class="deletelist" data-bind="click: $parent.deleteExpenseReport">X</a>
 
             <ul data-bind="foreach: todos">
                 <li>
                     <input type="checkbox" data-bind="checked: isDone" />
-                    <input class="todoItemInput" type="text" data-bind="value: title, disable: isDone, blurOnEnter: true" />
+                    <input class="expenseInput" type="text" data-bind="value: title, disable: isDone, blurOnEnter: true" />
                     <a href="#" data-bind="click: $parent.deleteTodo">X</a>
                     <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
                 </li>
@@ -51,7 +51,7 @@
 }
 else
 {
-    <div class="todoList" id="loginPanel">
+    <div class="ExpenseReport" id="loginPanel">
         <section id="localLoginPanel">
             <h2>Log in</h2>
             @Html.Partial("_Login")
@@ -62,7 +62,7 @@ else
         </section>
         <p>First time here? <a id="showRegister">Sign up</a></p>
     </div>
-    <div class="todoList" id="registerPanel">
+    <div class="ExpenseReport" id="registerPanel">
         <h2>Sign up</h2>
         @Html.Partial("_Register")
         <p>Already signed up? <a id="showLogin">Log in</a></p>
@@ -75,6 +75,6 @@ else
     @section scripts {
         @Scripts.Render("~/bundles/knockout")
         @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/todo")
+        @Scripts.Render("~/bundles/expenses")
     }
 }

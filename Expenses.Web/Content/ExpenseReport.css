@@ -1,4 +1,4 @@
-.todoList {
+.ExpenseReport {
     position: relative;
     width: 280px;
     min-height: 280px;
@@ -13,7 +13,7 @@
     vertical-align: top;
 }
 
-    .todoList:before {
+    .ExpenseReport:before {
         content: "";
         position: absolute;
         top: 0;
@@ -23,17 +23,17 @@
         border-color: #f6f6c7 #fff;
     }
 
-    .todoList header {
+    .ExpenseReport header {
         z-index: auto;
     }
 
-    .todoList header input, .todoList header input:focus,
-    .todoList ul input, .todoList ul input:focus, .addTodo {
+    .ExpenseReport header input, .ExpenseReport header input:focus,
+    .ExpenseReport ul input, .ExpenseReport ul input:focus, .addTodo {
         font-family: 'Bradley Hand ITC';
         outline: none;
     }
 
-    .todoList header input {
+    .ExpenseReport header input {
         border: none;
         background: none;
         text-align: center;
@@ -41,7 +41,7 @@
         font-size: 1.8em;
     }
 
-    .todoList ul {
+    .ExpenseReport ul {
         list-style: none;
         padding: 0 0 0 12px;
         margin: 0;
@@ -54,24 +54,24 @@
         color: #999;
     }
 
-    .todoList input[type=text], .addTodo {
+    .ExpenseReport input[type=text], .addTodo {
         width: 200px;
         border: none;
         background: none;
     }
 
-    .todoList input[disabled] {
+    .ExpenseReport input[disabled] {
         color: #666;
         text-decoration: line-through;
     }
 
-    .todoList a {
+    .ExpenseReport a {
         color: silver;
         text-decoration: none;
         font: .8em verdana;
     }
 
-        .todoList a.deletelist {
+        .ExpenseReport a.deletelist {
             position: absolute;
             top: -5px;
             right: -10px;
@@ -87,6 +87,6 @@
             display: inline-block;
         }
 
-.todoItemInput::-ms-clear {
+.expenseInput::-ms-clear {
     display: none;
 }

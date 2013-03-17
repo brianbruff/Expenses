@@ -24,11 +24,11 @@ namespace Expenses.Web
             bundles.Add(new ScriptBundle("~/bundles/ajaxlogin").Include(
                 "~/Scripts/app/ajaxlogin.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/todo").Include(
-                "~/Scripts/app/todo.bindings.js",
-                "~/Scripts/app/todo.datacontext.js",
-                "~/Scripts/app/todo.model.js",
-                "~/Scripts/app/todo.viewmodel.js"));
+            bundles.Add(new ScriptBundle("~/bundles/expenses").Include(
+                "~/Scripts/app/expenses.bindings.js",
+                "~/Scripts/app/expenses.datacontext.js",
+                "~/Scripts/app/expenses.model.js",
+                "~/Scripts/app/expenses.viewmodel.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -37,7 +37,7 @@ namespace Expenses.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/Site.css",
-                "~/Content/TodoList.css"));
+                "~/Content/ExpenseReport.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

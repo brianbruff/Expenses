@@ -12,8 +12,6 @@ namespace Expenses.Model
         public int Id { get; set; }
 
         [Required]
-        public string Type { get; set; }
-
-        virtual public List<Expense> Expenses { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,22 +1,22 @@
 ﻿(function (ko, datacontext) {
-    datacontext.todoItem = todoItem;
-    datacontext.todoList = todoList;
+    datacontext.expense = expense;
+    datacontext.ExpenseReport = ExpenseReport;
 
-    function todoItem(data) {
+    function expense(data) {
         var self = this;
         data = data || {};
 
         // Persisted properties
-        self.todoItemId = data.todoItemId;
+        self.expenseId = data.expenseId;
         self.title = ko.observable(data.title);
         self.isDone = ko.observable(data.isDone);
-        self.todoListId = data.todoListId;
+        self.ExpenseReportId = data.ExpenseReportId;
 
         // Non-persisted properties
         self.errorMessage = ko.observable();
 
         saveChanges = function () {
-            return datacontext.saveChangedTodoItem(self);
+            return datacontext.saveChangedExpense(self);
         };
 
         // Auto-save when these properties change
@@ -26,15 +26,15 @@
         self.toJson = function () { return ko.toJSON(self) };
     };
 
-    function todoList(data) {
+    function ExpenseReport(data) {
         var self = this;
         data = data || {};
 
         // Persisted properties
-        self.todoListId = data.todoListId;
+        self.ExpenseReportId = data.ExpenseReportId;
         self.userId = data.userId || "to be replaced";
         self.title = ko.observable(data.title || "My todos");
-        self.todos = ko.observableArray(importTodoItems(data.todos));
+        self.todos = ko.observableArray(importExpenses(data.todos));
 
         // Non-persisted properties
         self.isEditingListTitle = ko.observable(false);
@@ -42,37 +42,37 @@
         self.errorMessage = ko.observable();
 
         self.deleteTodo = function () {
-            var todoItem = this;
-            return datacontext.deleteTodoItem(todoItem)
-                 .done(function () { self.todos.remove(todoItem); });
+            var expense = this;
+            return datacontext.deleteExpense(expense)
+                 .done(function () { self.todos.remove(expense); });
         };
 
         // Auto-save when these properties change
         self.title.subscribe(function () {
-            return datacontext.saveChangedTodoList(self);
+            return datacontext.saveChangedExpenseReport(self);
         });
 
         self.toJson = function () { return ko.toJSON(self) };
     };
-    // convert raw todoItem data objects into array of TodoItems
-    function importTodoItems(todoItems) {
-        /// <returns value="[new todoItem()]"></returns>
-        return $.map(todoItems || [],
-                function (todoItemData) {
-                    return datacontext.createTodoItem(todoItemData);
+    // convert raw expense data objects into array of Expenses
+    function importExpenses(expenses) {
+        /// <returns value="[new expense()]"></returns>
+        return $.map(expenses || [],
+                function (expenseData) {
+                    return datacontext.createExpense(expenseData);
                 });
     }
-    todoList.prototype.addTodo = function () {
+    ExpenseReport.prototype.addTodo = function () {
         var self = this;
         if (self.newTodoTitle()) { // need a title to save
-            var todoItem = datacontext.createTodoItem(
+            var expense = datacontext.createExpense(
                 {
                     title: self.newTodoTitle(),
-                    todoListId: self.todoListId
+                    ExpenseReportId: self.ExpenseReportId
                 });
-            self.todos.push(todoItem);
-            datacontext.saveNewTodoItem(todoItem);
+            self.todos.push(expense);
+            datacontext.saveNewExpense(expense);
             self.newTodoTitle("");
         }
     };
-})(ko, todoApp.datacontext);
+})(ko, expensesApp.datacontext);

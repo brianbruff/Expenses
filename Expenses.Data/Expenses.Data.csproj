@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicContentInitializer.cs" />
     <Compile Include="EFRepository.cs" />
     <Compile Include="ExpensesDbContext.cs" />
     <Compile Include="ExpensesUow.cs" />

@@ -13,7 +13,10 @@ namespace Expenses.Data.Contracts
         void Commit();
 
         // Repositories
-        //IRepository<Employee> Employees { get; }
+        IRepository<ExpenseType> ExpenseTypes { get; }
+        IRepository<Currency> Currencies { get; }
+        IRepository<Employee> Employees { get; }
         IRepository<Expense> Expenses { get; }
+        IRepository<ExpenseReport> ExpenseReports { get; }
     }
 }

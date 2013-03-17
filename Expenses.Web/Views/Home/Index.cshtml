@@ -26,16 +26,17 @@
         <article class="ExpenseReport">
             <header>
                 <form data-bind="validate: true">
-                    <input class="required" data-bind="value: title, selected: isEditingListTitle, blurOnEnter: true" />
+                    <input class="required" data-bind="value: name, selected: isEditingListTitle, blurOnEnter: true" />
                 </form>
             </header>
 
             <a href="#" class="deletelist" data-bind="click: $parent.deleteExpenseReport">X</a>
 
-            <ul data-bind="foreach: todos">
+            <ul data-bind="foreach: expenses">
                 <li>
-                    <input type="checkbox" data-bind="checked: isDone" />
-                    <input class="expenseInput" type="text" data-bind="value: title, disable: isDone, blurOnEnter: true" />
+                    @*<input type="checkbox" data-bind="checked: isDone" />*@
+                    @*<input class="expenseInput" type="text" data-bind="value: description, disable: isDone, blurOnEnter: true" />*@
+                    <input class="expenseInput" type="text" data-bind="value: description, blurOnEnter: true" />
                     <a href="#" data-bind="click: $parent.deleteTodo">X</a>
                     <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
                 </li>
@@ -73,6 +74,7 @@ else
 @if (@User.Identity.IsAuthenticated)
 {
     @section scripts {
+        @Scripts.Render("~/bundles/moment")
         @Scripts.Render("~/bundles/knockout")
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/expenses")

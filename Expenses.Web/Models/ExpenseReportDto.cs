@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Expenses.Model;
 
 namespace Expenses.Web.Models
@@ -14,13 +16,16 @@ namespace Expenses.Web.Models
 
         public int EmployeeId { get; set; }
 
+        public IQueryable<ExpenseDto> Expenses { get; set; }
+
         public ExpenseReport ToEntity()
         {
             return new ExpenseReport
                        {
                            Id = ExpenseReportId,
                            Name = Name,
-                           Date = Date
+                           Date = Date,
+                           Expenses = Expenses.Select(e => e.ToEntity()).ToList()
                        };
         }
     }

@@ -215,6 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ExpenseDto.cs" />
     <Compile Include="Models\ExpenseReportDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,13 +1,10 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using Expenses.Model;
+using Expenses.Web.Filters;
+using Expenses.Web.Models;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Expenses.Data;
-using Expenses.Data.Contracts;
-using Expenses.Model;
-using Expenses.Web.Filters;
-using Expenses.Web.Models;
 
 namespace Expenses.Web.Controllers.Api
 {
@@ -17,8 +14,24 @@ namespace Expenses.Web.Controllers.Api
     {
         public IQueryable<ExpenseReportDto> GetExpenseReports()
         {
-            return Uow.ExpenseReports.GetAll().Where(r => r.Employee.UserId == User.Identity.Name)
-                .Select(x => new ExpenseReportDto{ ExpenseReportId = x.Id, Name = x.Name, Date = x.Date});
+            return Uow.ExpenseReports.Include(r => r.Expenses).GetAll()
+                .Where(r => r.Employee.UserId == User.Identity.Name)
+                .Select(r => new ExpenseReportDto
+                                 {
+                                     ExpenseReportId = r.Id, 
+                                     Name = r.Name, 
+                                     Date = r.Date, 
+                                     Expenses = r.Expenses.Select(e => new ExpenseDto
+                                                                           {
+                                                                               ExpenseId = e.Id,
+                                                                               ExpenseReportId = r.Id,
+                                                                               Date = e.Date,
+                                                                               Description = e.Description,
+                                                                               CurrencyId = e.CurrencyId,
+                                                                               TypeId = e.TypeId,
+                                                                               Image = e.Image
+                                                                           }).AsQueryable()
+                                 });
         }
 
         public IQueryable<Expense> GetExpenseReport(int id)

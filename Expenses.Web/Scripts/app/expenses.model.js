@@ -8,9 +8,10 @@
 
         // Persisted properties
         self.expenseId = data.expenseId;
-        self.title = ko.observable(data.title);
-        self.isDone = ko.observable(data.isDone);
         self.expenseReportId = data.expenseReportId;
+        
+        self.description = ko.observable(data.description);
+        
 
         // Non-persisted properties
         self.errorMessage = ko.observable();
@@ -20,8 +21,8 @@
         };
 
         // Auto-save when these properties change
-        self.isDone.subscribe(saveChanges);
-        self.title.subscribe(saveChanges);
+        ///self.isDone.subscribe(saveChanges);
+        self.description.subscribe(saveChanges);
 
         self.toJson = function () { return ko.toJSON(self) };
     };
@@ -32,9 +33,8 @@
 
         // Persisted properties
         self.expenseReportId = data.expenseReportId;
-        self.userId = data.userId || "to be replaced";
-        self.title = ko.observable(data.title || "My todos");
-        self.todos = ko.observableArray(importExpenses(data.todos));
+        self.name = ko.observable(data.name || "<New...>");
+        self.expenses = ko.observableArray(importExpenses(data.expenses));
 
         // Non-persisted properties
         self.isEditingListTitle = ko.observable(false);
@@ -48,7 +48,7 @@
         };
 
         // Auto-save when these properties change
-        self.title.subscribe(function () {
+        self.name.subscribe(function () {
             return datacontext.saveChangedExpenseReport(self);
         });
 

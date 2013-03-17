@@ -70,7 +70,7 @@
                     title: self.newTodoTitle(),
                     expenseReportId: self.expenseReportId
                 });
-            self.todos.push(expense);
+            self.expenses.push(expense);
             datacontext.saveNewExpense(expense);
             self.newTodoTitle("");
         }

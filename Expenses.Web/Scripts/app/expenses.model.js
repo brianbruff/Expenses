@@ -9,7 +9,7 @@
         // Persisted properties
         self.expenseId = data.expenseId;
         self.expenseReportId = data.expenseReportId;
-        
+        self.date = moment(data.date).format("DD/MM/YYYY");
         self.description = ko.observable(data.description);
         
 

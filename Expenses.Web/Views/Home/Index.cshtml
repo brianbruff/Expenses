@@ -47,9 +47,16 @@
                 <button>Add Expense</button>
                 <button data-bind=" disabled: expenses().length === 0">Submit Report</button>
                 
-                <table >
+                <table id="expensesTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
                     <tbody data-bind="foreach: expenses()">
                         <tr style="cursor:pointer" >
+                            <td data-bind="text: date"></td>
                             <td data-bind="text: description"></td>
                         </tr>
                     </tbody>

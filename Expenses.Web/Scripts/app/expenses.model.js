@@ -37,7 +37,7 @@
         self.expenses = ko.observableArray(importExpenses(data.expenses));
 
         // Non-persisted properties
-        self.isEditingListTitle = ko.observable(false);
+        self.selected = ko.observable(false);
         self.newTodoTitle = ko.observable();
         self.errorMessage = ko.observable();
 

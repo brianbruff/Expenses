@@ -188,7 +188,7 @@ ol.round {
 
 #main-content {
     min-height: 400px;
-    text-align: center;
+    text-align: left;
 }
 
 /*#region info and errors */

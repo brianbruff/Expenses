@@ -4,7 +4,7 @@
         error = ko.observable(),
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();
-            expenseReport.isEditingListTitle(true);
+            expenseReport.selected(true);
             datacontext.saveNewExpenseReport(expenseReport)
                 .then(addSucceeded)
                 .fail(addFailed);

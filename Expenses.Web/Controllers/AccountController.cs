@@ -107,7 +107,7 @@ namespace Expenses.Web.Controllers
             uow.Commit();
 
             // todo: remove this in production
-            report.Expenses.Add(new Model.Expense { Currency = euro, Date = DateTime.Now.Date, Description = "Taxi DGL => ENI", Type = uow.ExpenseTypes.GetById(1) });
+            report.Expenses.Add(new Model.Expense { Currency = euro, Date = DateTime.Now.Date, Description = "Taxi DGL => Buckingham", Type = uow.ExpenseTypes.GetById(1) });
             uow.Commit();
             
         }

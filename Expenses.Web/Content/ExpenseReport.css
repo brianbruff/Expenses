@@ -1,7 +1,7 @@
 /*TODO: Style */
 
 #expensesWrap {
-    width: 750px;
+    width: 950px;
     margin: 0 auto;
 }
 
@@ -11,6 +11,12 @@
 }
 
 #expensesList {
-    float: right;
-    width: 600px;
+    float: left;
+    width: 500px;
+}
+
+#expenseDetails {
+    float: left;
+    width: 300px;
+    background-color:#ffd800;
 }

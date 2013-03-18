@@ -32,7 +32,7 @@
 </script> 
 
 
-<script id="expensesTmpl" type="text/html">    
+@*<script id="expensesTmpl" type="text/html">    
     <ul data-bind="foreach: expenses">
         <li>            
             <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
@@ -42,7 +42,7 @@
     <form data-bind="submit: addExpense">
         <input class="addTodo" type="text" data-bind="value: newTodoTitle, placeholder: 'Type here to add', blurOnEnter: true, event: { blur: addExpense }" />
     </form>
-</script>
+</script>*@
 
 
 <div id="main-content">
@@ -56,9 +56,11 @@
         <div id="Master" data-bind="template: { name: 'expenseReportsTmpl', foreach: expenseReports, visible: expenseReports().length > 0 }"></div>
     </section>
     
-    <section id="expensesList">
-        @*<div id="Detail"data-bind="template: { name: 'expensesTmpl', data: selectedExpenseReport}"></div>*@
-    </section>
+    @*<section id="expensesList">
+        <div id="Detail"data-bind="template: { name: 'expensesTmpl', data: $root.selected}">
+            test
+        </div>
+    </section>*@
 
    
 }

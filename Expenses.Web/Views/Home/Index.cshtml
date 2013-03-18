@@ -16,34 +16,6 @@
 </header>
 
 
-@*Templates*@
-<script id="expenseReportsTmpl" type="text/html">       
-    <article class="ExpenseReport">
-        <header>
-            <form data-bind="validate: true">
-                <input class="required" data-bind="value: name, selected: selected, blurOnEnter: true" />
-            </form>
-        </header>
-
-        <a href="#" class="deletelist" data-bind="click: $parent.deleteExpenseReport">X</a>          
-            
-        <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
-    </article>    
-</script> 
-
-
-@*<script id="expensesTmpl" type="text/html">    
-    <ul data-bind="foreach: expenses">
-        <li>            
-            <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
-        </li>
-    </ul>
-
-    <form data-bind="submit: addExpense">
-        <input class="addTodo" type="text" data-bind="value: newTodoTitle, placeholder: 'Type here to add', blurOnEnter: true, event: { blur: addExpense }" />
-    </form>
-</script>*@
-
 
 <div id="main-content">
 @if (@User.Identity.IsAuthenticated)
@@ -52,15 +24,20 @@
     <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
     <button data-bind="click: addExpenseReport">Add Expense</button>
     
-    <section id="expenseReportsList">
-        <div id="Master" data-bind="template: { name: 'expenseReportsTmpl', foreach: expenseReports, visible: expenseReports().length > 0 }"></div>
+    <section>
+        <div id="expenseReportsList" data-bind="visible: expenseReports().length > 0">
+            <ul data-bind="foreach: expenseReports()">
+                <li>
+                    <a data-bind="attr: { title: name, href: '#' }, text : name"></a>
+                </li>
+            </ul>
+        </div>
+        
     </section>
     
-    @*<section id="expensesList">
-        <div id="Detail"data-bind="template: { name: 'expensesTmpl', data: $root.selected}">
-            test
-        </div>
-    </section>*@
+    <section id="expensesList">
+
+    </section>
 
    
 }

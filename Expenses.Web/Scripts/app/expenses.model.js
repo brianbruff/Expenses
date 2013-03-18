@@ -34,12 +34,17 @@
         // Persisted properties
         self.expenseReportId = data.expenseReportId;
         self.name = ko.observable(data.name || "<New...>");
+        self.date = ko.observable(data.date);
         self.expenses = ko.observableArray(importExpenses(data.expenses));
 
         // Non-persisted properties
-        self.selected = ko.observable(false);
+        self.isEditing = ko.observable(false);
         self.newTodoTitle = ko.observable();
         self.errorMessage = ko.observable();
+        // Non-persisted properties
+        self.isSubmitted = ko.computed(function () {
+            return self.date !== null;
+        });
 
         self.deleteTodo = function () {
             var expense = this;

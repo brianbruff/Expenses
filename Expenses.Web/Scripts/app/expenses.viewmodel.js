@@ -2,9 +2,13 @@
     /// <field name="expenseReports" value="[new datacontext.expenseReport()]"></field>
     var expenseReports = ko.observableArray(),
         error = ko.observable(),
+        selectedReport = ko.observable(new datacontext.expenseReport()),
+        selectReport = function(report) {
+            selectedReport = report;
+        },
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();
-            expenseReport.selected(true);
+            expenseReport.isEditing(true);
             datacontext.saveNewExpenseReport(expenseReport)
                 .then(addSucceeded)
                 .fail(addFailed);
@@ -32,6 +36,8 @@
     datacontext.getExpenseReports(expenseReports, error); // load ExpenseReports
 
     return {
+        selectedReport: selectedReport,
+        selectReport: selectReport,
         expenseReports: expenseReports,
         error: error,
         addExpenseReport: addExpenseReport,

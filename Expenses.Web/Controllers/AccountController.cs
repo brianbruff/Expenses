@@ -102,7 +102,7 @@ namespace Expenses.Web.Controllers
             uow.Commit();
 
             // Create the blank report, all new expenses are in this report
-            var report = new Model.ExpenseReport { Employee = employee, Name = "<New Report>" };
+            var report = new Model.ExpenseReport { Employee = employee, Name = "Unsubmitted" };
             uow.ExpenseReports.Add(report);
             uow.Commit();
 

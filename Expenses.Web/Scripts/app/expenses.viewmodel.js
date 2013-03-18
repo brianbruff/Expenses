@@ -2,9 +2,10 @@
     /// <field name="expenseReports" value="[new datacontext.expenseReport()]"></field>
     var expenseReports = ko.observableArray(),
         error = ko.observable(),
-        selectedReport = ko.observable(new datacontext.expenseReport()),
-        selectReport = function(report) {
-            selectedReport = report;
+        selectedReport = ko.observable(),
+        getReport = function(expenseReportId) {
+            datacontext.getExpenseReport(expenseReportId, selectedReport, error);
+            
         },
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();
@@ -37,7 +38,7 @@
 
     return {
         selectedReport: selectedReport,
-        selectReport: selectReport,
+        getReport: getReport,
         expenseReports: expenseReports,
         error: error,
         addExpenseReport: addExpenseReport,

@@ -18,7 +18,7 @@ namespace Expenses.Web.Models
 
         public int TypeId { get; set; }
 
-        public byte[] Image { get; set; }
+        //public byte[] Image { get; set; }
 
         public Expense ToEntity()
         {
@@ -28,7 +28,7 @@ namespace Expenses.Web.Models
                            CurrencyId = CurrencyId,
                            Description = Description,
                            TypeId = TypeId,
-                           Image = Image,
+                           //Image = Image,
                            Date = Date
                        };
         }

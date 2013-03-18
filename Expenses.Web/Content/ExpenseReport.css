@@ -1,1 +1,16 @@
 /*TODO: Style */
+
+#expensesWrap {
+    width: 750px;
+    margin: 0 auto;
+}
+
+#expenseReportsList {
+    float: left;
+    width: 150px;
+}
+
+#expensesList {
+    float: right;
+    width: 600px;
+}

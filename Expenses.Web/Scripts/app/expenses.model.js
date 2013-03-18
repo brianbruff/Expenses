@@ -33,7 +33,7 @@
 
         // Persisted properties
         self.expenseReportId = data.expenseReportId;
-        self.name = ko.observable(data.name || "<New...>");
+        self.name = ko.observable(data.name || "Unsubmitted");
         self.date = ko.observable(data.date);
         self.expenses = ko.observableArray(importExpenses(data.expenses));
 

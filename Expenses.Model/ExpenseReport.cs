@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Expenses.Model
 {
-    public sealed class ExpenseReport
+    public class ExpenseReport
     {
         public ExpenseReport()
         {
@@ -21,10 +21,10 @@ namespace Expenses.Model
 
         public DateTime? Date { get; set; }
 
-        public Employee Employee { get; set; }
+        virtual public Employee Employee { get; set; }
 
         public int EmployeeId { get; set; }
 
-        public List<Expense> Expenses { get; set; }
+        virtual public List<Expense> Expenses { get; set; }
     }
 }

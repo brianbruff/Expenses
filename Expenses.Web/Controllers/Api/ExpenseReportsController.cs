@@ -14,40 +14,50 @@ namespace Expenses.Web.Controllers.Api
     {
         public IQueryable<ExpenseReportDto> GetExpenseReports()
         {
-            return Uow.ExpenseReports.Include(r => r.Expenses).GetAll()
+            return Uow.ExpenseReports.Include(r => r.Employee).GetAll()
                 .Where(r => r.Employee.UserId == User.Identity.Name)
                 .Select(r => new ExpenseReportDto
-                                 {
-                                     ExpenseReportId = r.Id, 
-                                     Name = r.Name, 
-                                     Date = r.Date, 
-                                     Expenses = r.Expenses.Select(e => new ExpenseDto
-                                                                           {
-                                                                               ExpenseId = e.Id,
-                                                                               ExpenseReportId = r.Id,
-                                                                               Date = e.Date,
-                                                                               Description = e.Description,
-                                                                               CurrencyId = e.CurrencyId,
-                                                                               TypeId = e.TypeId,
-                                                                               Image = e.Image
-                                                                           }).AsQueryable()
-                                 });
+                {
+                    ExpenseReportId = r.Id,
+                    Name = r.Name,
+                    Date = r.Date
+                });
         }
 
-        public IQueryable<Expense> GetExpenseReport(int id)
+        public ExpenseReportDto GetExpenseReport(int id)
         {
-            var expense = Uow.ExpenseReports.Include(e => e.Employee);
-            if (expense == null)
+            var expenseReport = Uow.ExpenseReports.Include(e => e.Employee).Include(r => r.Expenses).GetById(id);
+            if (expenseReport == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            //if (expense.Employee.UserId != User.Identity.Name)
-            //{
-            //    // Trying to modify a record that does not belong to the user
-            //    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
-            //}
-            return null;
+            if (expenseReport.Employee.UserId != User.Identity.Name)
+            {
+                // Trying to modify a record that does not belong to the user
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
+            }
+
+            var dto = new ExpenseReportDto
+                                 {
+                                     ExpenseReportId = expenseReport.Id,
+                                     Name = expenseReport.Name,
+                                     Date = expenseReport.Date,
+                                     Expenses = expenseReport.Expenses.Select(e => new ExpenseDto
+                                                                           {
+                                                                               ExpenseId = e.Id,
+                                                                               ExpenseReportId = expenseReport.Id,
+                                                                               Date = e.Date,
+                                                                               Description = e.Description,
+                                                                               CurrencyId = e.CurrencyId,
+                                                                               TypeId = e.TypeId,
+                                                                               //Image = e.Image
+                                                                           }).AsQueryable()
+                                 };
+
+            return dto;
+
+            
         }
 
         

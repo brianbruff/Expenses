@@ -18,48 +18,64 @@
 
 
 <div id="main-content">
-@if (@User.Identity.IsAuthenticated)
-{
-    <p class="error" data-bind="text: error"></p>
-    <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
-    <button data-bind="click: addExpenseReport">Add Expense</button>
     
-    <section>
-        <div id="expenseReportsList" data-bind="visible: expenseReports().length > 0">
-            <ul data-bind="foreach: expenseReports()">
-                <li>
-                    <a data-bind="attr: { title: name, href: '#' }, text : name"></a>
-                </li>
-            </ul>
-        </div>
-        
-    </section>
-    
-    <section id="expensesList">
 
-    </section>
+    @if (@User.Identity.IsAuthenticated)
+    {
+        <p class="error" data-bind="text: error"></p>
+        <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
+    @*<button data-bind="click: addExpenseReport">Add Expense</button>*@
+    
+    
+    <div id="expensesWrap">
+        <section>
+            <div id="expenseReportsList" data-bind="visible: expenseReports().length > 0">
+                <table>
+                    <tbody data-bind="foreach: expenseReports()">
+                        @*<tr data-bind="click: personViewModel.getDetail, attr: { id: PersonID }" style="cursor:pointer" >*@
+                        <tr data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor:pointer" >
+                            <td data-bind="text: name"></td>
+                        </tr>
+                    </tbody>
+                </table>        
+            </div>
+        
+        </section>
+    
+        <section>
+            <div id="expensesList">
+                <table data-bind="with:selectedReport">
+                    <tbody data-bind="foreach: expenses()">
+                        <tr style="cursor:pointer" >
+                            <td data-bind="text: description"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
 
    
-}
-else
-{
-    <div class="ExpenseReport" id="loginPanel">
-        <section id="localLoginPanel">
-            <h2>Log in</h2>
-            @Html.Partial("_Login")
-        </section>
-        <section id="socialLoginPanel">
-            <h2>Log in using another service</h2>
-            @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-        <p>First time here? <a id="showRegister">Sign up</a></p>
-    </div>
-    <div class="ExpenseReport" id="registerPanel">
-        <h2>Sign up</h2>
-        @Html.Partial("_Register")
-        <p>Already signed up? <a id="showLogin">Log in</a></p>
-    </div>
-}
+    }
+    else
+    {
+        <div class="ExpenseReport" id="loginPanel">
+            <section id="localLoginPanel">
+                <h2>Log in</h2>
+                @Html.Partial("_Login")
+            </section>
+            <section id="socialLoginPanel">
+                <h2>Log in using another service</h2>
+                @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+            <p>First time here? <a id="showRegister">Sign up</a></p>
+        </div>
+        <div class="ExpenseReport" id="registerPanel">
+            <h2>Sign up</h2>
+            @Html.Partial("_Register")
+            <p>Already signed up? <a id="showLogin">Log in</a></p>
+        </div>
+    }
 </div>
 
 @if (@User.Identity.IsAuthenticated)

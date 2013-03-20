@@ -55,7 +55,7 @@
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: expenses()">
-                        <tr style="cursor:pointer" >
+                        <tr data-bind="click: $root.getExpense, attr: { expenseId: expenseId }" style="cursor:pointer" >
                             <td data-bind="text: date"></td>
                             <td data-bind="text: description"></td>
                         </tr>
@@ -65,7 +65,7 @@
         </section>
         
         <section>
-            <div id="expenseDetails">
+            <div id="expenseDetails" data-bind="disabled: selectedReport.selectedExpense !== null">
                 test
 
             </div>

@@ -36,6 +36,11 @@
         self.name = ko.observable(data.name || "Unsubmitted");
         self.date = ko.observable(data.date);
         self.expenses = ko.observableArray(importExpenses(data.expenses));
+        self.selectedExpense = ko.observable();
+        
+        getExpense = function (expenseId) {
+            datacontext.getExpense(expenseId, selectedExpense, error);
+        },
 
         // Non-persisted properties
         self.isEditing = ko.observable(false);

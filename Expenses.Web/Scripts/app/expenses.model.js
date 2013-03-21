@@ -16,13 +16,13 @@
         // Non-persisted properties
         self.errorMessage = ko.observable();
 
-        saveChanges = function () {
+        self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
         };
 
         // Auto-save when these properties change
         ///self.isDone.subscribe(saveChanges);
-        self.description.subscribe(saveChanges);
+        self.description.subscribe(self.saveChanges);
 
         self.toJson = function () { return ko.toJSON(self) };
     };
@@ -38,9 +38,9 @@
         self.expenses = ko.observableArray(importExpenses(data.expenses));
         self.selectedExpense = ko.observable();
         
-        getExpense = function (expenseId) {
-            datacontext.getExpense(expenseId, selectedExpense, error);
-        },
+        self.getExpense = function (expenseId) {
+            datacontext.getExpense(expenseId.expenseId, self.selectedExpense, self.errorMessage);
+        };
 
         // Non-persisted properties
         self.isEditing = ko.observable(false);

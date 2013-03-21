@@ -43,7 +43,6 @@
     
         <section>
             <div id="expensesList" data-bind="with:selectedReport">
-                @*<button data-bind="click: addExpenseReport">Add Expense</button>*@
                 <button>Add Expense</button>
                 <button data-bind=" disabled: expenses().length === 0">Submit Report</button>
                 
@@ -55,21 +54,23 @@
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: expenses()">
-                        <tr data-bind="click: $root.getExpense, attr: { expenseId: expenseId }" style="cursor:pointer" >
+                        <tr data-bind="click: $parent.getExpense, attr: { expenseId: expenseId }" style="cursor:pointer" >
                             <td data-bind="text: date"></td>
                             <td data-bind="text: description"></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </section>
-        
-        <section>
-            <div id="expenseDetails" data-bind="disabled: selectedReport.selectedExpense !== null">
+                
+             
+            <div id="expenseDetails" data-bind="visible: selectedExpense != null">
                 test
 
             </div>
+        
+            </div>
         </section>
+        
+        
     </div>
 
    

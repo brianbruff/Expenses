@@ -5,6 +5,7 @@ window.expensesApp.datacontext = (function () {
     var datacontext = {
         getExpenseReports: getExpenseReports,
         getExpenseReport: getExpenseReport,
+        getExpense: getExpense,
         createExpense: createExpense,
         createExpenseReport: createExpenseReport,
         saveNewExpense: saveNewExpense,
@@ -32,12 +33,25 @@ window.expensesApp.datacontext = (function () {
         }
     }
     function getExpenseReport(expenseReportId, expenseReportObservable, errorObservable) {
-        return ajaxRequest("get", expenseReportUrl() + "/" + expenseReportId.expenseReportId)
+        return ajaxRequest("get", expenseReportUrl() + "/" + expenseReportId)
             .done(getSucceeded)
             .fail(getFailed);
 
         function getSucceeded(data) {
             expenseReportObservable(createExpenseReport(data));
+        }
+
+        function getFailed() {
+            errorObservable("Error retrieving expense reports.");
+        }
+    }
+    function getExpense(expenseId, expenseObservable, errorObservable) {
+        return ajaxRequest("get", expenseUrl() + "/" + expenseId)
+            .done(getSucceeded)
+            .fail(getFailed);
+
+        function getSucceeded(data) {
+            expenseObservable(createExpense(data));
         }
 
         function getFailed() {

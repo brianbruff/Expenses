@@ -4,7 +4,7 @@
         error = ko.observable(),
         selectedReport = ko.observable(),
         getReport = function(expenseReportId) {
-            datacontext.getExpenseReport(expenseReportId, selectedReport, error);
+            datacontext.getExpenseReport(expenseReportId.expenseReportId, selectedReport, error);
         },
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();

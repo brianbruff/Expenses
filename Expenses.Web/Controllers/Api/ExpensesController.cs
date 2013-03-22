@@ -14,12 +14,18 @@ namespace Expenses.Web.Controllers.Api
     //[ValidateHttpAntiForgeryToken]
     public class ExpensesController : ApiControllerBase
     {
+        public ExpensesController(IExpensesUow uow)
+            : base(uow)
+        {
+            
+        }
+
         public IQueryable<Expense> GetExpenses()
         {
             return Uow.Expenses.GetAll();
         }
 
-        public IQueryable<Expense> GetExpense(int id)
+        public Expense GetExpense(int id)
         {
             var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
             if (expense == null)

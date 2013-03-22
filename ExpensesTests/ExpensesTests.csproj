@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.0-alpha3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Expenses.Data.Contracts.Fakes">
+      <HintPath>FakesAssemblies\Expenses.Data.Contracts.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -63,8 +66,8 @@
   <ItemGroup>
     <Compile Include="BasicContentInitializer.cs" />
     <Compile Include="DatabaseTests.cs" />
-    <Compile Include="ExpenseControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExpenseControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Expenses.Data.Contracts\Expenses.Data.Contracts.csproj">
@@ -86,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Fakes Include="Fakes\Expenses.Data.Contracts.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -11,8 +11,6 @@ namespace ExpensesTests
     [TestClass]
     public class DatabaseTests : IDisposable
     {
-
-
         [TestInitialize]
         public void TestCreate()
         {

@@ -1,0 +1,3 @@
+D:\GitHub\Expenses\ExpensesTests\Fakes\Expenses.Data.Contracts.fakes : warning : Cannot generate shim for Expenses.Data.Contracts.IUserRepository`1: type is an interface.
+D:\GitHub\Expenses\ExpensesTests\Fakes\Expenses.Data.Contracts.fakes : warning : Cannot generate shim for Expenses.Data.Contracts.IExpensesUow: type is an interface.
+D:\GitHub\Expenses\ExpensesTests\Fakes\Expenses.Data.Contracts.fakes : warning : Cannot generate shim for Expenses.Data.Contracts.IRepository`1: type is an interface.

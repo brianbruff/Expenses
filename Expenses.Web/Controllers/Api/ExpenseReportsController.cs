@@ -1,4 +1,5 @@
-﻿using Expenses.Model;
+﻿using Expenses.Data.Contracts;
+using Expenses.Model;
 using Expenses.Web.Filters;
 using Expenses.Web.Models;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace Expenses.Web.Controllers.Api
     [ValidateHttpAntiForgeryToken]
     public class ExpenseReportsController : ApiControllerBase
     {
+        public ExpenseReportsController(IExpensesUow uow): base(uow)
+        {
+            
+        }
+
         public IQueryable<ExpenseReportDto> GetExpenseReports()
         {
             return Uow.ExpenseReports.Include(r => r.Employee).GetAll()

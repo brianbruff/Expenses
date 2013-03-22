@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Expenses.Data.Contracts.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:Expenses.Data.Contracts.Fakes.StubIExpensesUow">
+            <summary>Stub type of Expenses.Data.Contracts.IExpensesUow</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIExpensesUow.#ctor">
+            <summary>Initializes a new instance of type StubIExpensesUow</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIExpensesUow.Commit">
+            <summary>Sets the stub of IExpensesUow.Commit()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIExpensesUow.CurrenciesGet">
+            <summary>Sets the stub of IExpensesUow.get_Currencies()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIExpensesUow.EmployeesGet">
+            <summary>Sets the stub of IExpensesUow.get_Employees()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIExpensesUow.ExpenseReportsGet">
+            <summary>Sets the stub of IExpensesUow.get_ExpenseReports()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIExpensesUow.ExpenseTypesGet">
+            <summary>Sets the stub of IExpensesUow.get_ExpenseTypes()</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIExpensesUow.edc::Expenses#Data#Contracts#IExpensesUow#Commit">
+            <summary>Sets the stub of IExpensesUow.Commit()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIExpensesUow.ExpensesGet">
+            <summary>Sets the stub of IExpensesUow.get_Expenses()</summary>
+        </member>
+        <member name="P:Expenses.Data.Contracts.Fakes.StubIExpensesUow.edc::Expenses#Data#Contracts#IExpensesUow#Currencies">
+            <summary>Sets the stub of IExpensesUow.get_Currencies()</summary>
+        </member>
+        <member name="P:Expenses.Data.Contracts.Fakes.StubIExpensesUow.edc::Expenses#Data#Contracts#IExpensesUow#Employees">
+            <summary>Sets the stub of IExpensesUow.get_Employees()</summary>
+        </member>
+        <member name="P:Expenses.Data.Contracts.Fakes.StubIExpensesUow.edc::Expenses#Data#Contracts#IExpensesUow#ExpenseReports">
+            <summary>Sets the stub of IExpensesUow.get_ExpenseReports()</summary>
+        </member>
+        <member name="P:Expenses.Data.Contracts.Fakes.StubIExpensesUow.edc::Expenses#Data#Contracts#IExpensesUow#ExpenseTypes">
+            <summary>Sets the stub of IExpensesUow.get_ExpenseTypes()</summary>
+        </member>
+        <member name="P:Expenses.Data.Contracts.Fakes.StubIExpensesUow.edc::Expenses#Data#Contracts#IExpensesUow#Expenses">
+            <summary>Sets the stub of IExpensesUow.get_Expenses()</summary>
+        </member>
+        <member name="T:Expenses.Data.Contracts.Fakes.StubIRepository`1">
+            <summary>Stub type of Expenses.Data.Contracts.IRepository`1</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.#ctor">
+            <summary>Initializes a new instance of type StubIRepository</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIRepository`1.AddT0">
+            <summary>Sets the stub of IRepository`1.Add(!0 entity)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIRepository`1.DeleteInt32">
+            <summary>Sets the stub of IRepository`1.Delete(Int32 id)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIRepository`1.DeleteT0">
+            <summary>Sets the stub of IRepository`1.Delete(!0 entity)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#Add(`0)">
+            <summary>Sets the stub of IRepository`1.Add(!0 entity)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#Delete(`0)">
+            <summary>Sets the stub of IRepository`1.Delete(!0 entity)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#Delete(System.Int32)">
+            <summary>Sets the stub of IRepository`1.Delete(Int32 id)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#GetAll">
+            <summary>Sets the stub of IRepository`1.GetAll()</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#GetById(System.Int32)">
+            <summary>Sets the stub of IRepository`1.GetById(Int32 id)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#Include``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>Sets the stub of IRepository`1.Include(Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; path)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.edc::Expenses#Data#Contracts#IRepository{T}#Update(`0)">
+            <summary>Sets the stub of IRepository`1.Update(!0 entity)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIRepository`1.GetAll">
+            <summary>Sets the stub of IRepository`1.GetAll()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIRepository`1.GetByIdInt32">
+            <summary>Sets the stub of IRepository`1.GetById(Int32 id)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIRepository`1.IncludeOf1ExpressionOfFuncOfT0M0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,``0}},Expenses.Data.Contracts.IRepository{`0}})">
+            <summary>Sets stubs of Include(Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; path)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIRepository`1.UpdateT0">
+            <summary>Sets the stub of IRepository`1.Update(!0 entity)</summary>
+        </member>
+        <member name="T:Expenses.Data.Contracts.Fakes.StubIUserRepository`1">
+            <summary>Stub type of Expenses.Data.Contracts.IUserRepository`1</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.#ctor">
+            <summary>Initializes a new instance of type StubIUserRepository</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.AddT0">
+            <summary>Sets the stub of IUserRepository`1.Add(!0 entity)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.DeleteInt32">
+            <summary>Sets the stub of IUserRepository`1.Delete(Int32 id)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.DeleteT0">
+            <summary>Sets the stub of IUserRepository`1.Delete(!0 entity)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.edc::Expenses#Data#Contracts#IUserRepository{T}#Add(`0)">
+            <summary>Sets the stub of IUserRepository`1.Add(!0 entity)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.edc::Expenses#Data#Contracts#IUserRepository{T}#Delete(`0)">
+            <summary>Sets the stub of IUserRepository`1.Delete(!0 entity)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.edc::Expenses#Data#Contracts#IUserRepository{T}#Delete(System.Int32)">
+            <summary>Sets the stub of IUserRepository`1.Delete(Int32 id)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.edc::Expenses#Data#Contracts#IUserRepository{T}#GetAll">
+            <summary>Sets the stub of IUserRepository`1.GetAll()</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.edc::Expenses#Data#Contracts#IUserRepository{T}#GetById(System.Int32)">
+            <summary>Sets the stub of IUserRepository`1.GetById(Int32 id)</summary>
+        </member>
+        <member name="M:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.edc::Expenses#Data#Contracts#IUserRepository{T}#Update(`0)">
+            <summary>Sets the stub of IUserRepository`1.Update(!0 entity)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.GetAll">
+            <summary>Sets the stub of IUserRepository`1.GetAll()</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.GetByIdInt32">
+            <summary>Sets the stub of IUserRepository`1.GetById(Int32 id)</summary>
+        </member>
+        <member name="F:Expenses.Data.Contracts.Fakes.StubIUserRepository`1.UpdateT0">
+            <summary>Sets the stub of IUserRepository`1.Update(!0 entity)</summary>
+        </member>
+    </members>
+</doc>

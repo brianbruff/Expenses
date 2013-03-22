@@ -6,10 +6,9 @@ namespace Expenses.Web.Controllers.Api
 {
     public class ApiControllerBase : ApiController
     {
-        public ApiControllerBase()
+        public ApiControllerBase(IExpensesUow uow)
         {
-            var resolver = GlobalConfiguration.Configuration.DependencyResolver;
-            Uow = resolver.GetService(typeof(IExpensesUow)) as IExpensesUow;
+            this.Uow = uow;
         }
 
         

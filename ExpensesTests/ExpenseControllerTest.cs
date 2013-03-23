@@ -19,7 +19,7 @@ namespace ExpensesTests
                                           new Expense {Id = id}, 
                                   };
             IRepository<Expense> exp = expenseRepo as IRepository<Expense>;
-            expenseRepo.IncludeOf1ExpressionOfFuncOfT0M0 = (a, b) => exp;
+            //expenseRepo.IncludeOf1ExpressionOfFuncOfT0M0 = (a, b) => exp;
 
             var x = exp.Include(e => e.ExpenseReport);
 
@@ -30,7 +30,7 @@ namespace ExpensesTests
 
             var ctrlr = new Expenses.Web.Controllers.Api.ExpensesController(uow);
             var expense = ctrlr.GetExpense(5);
-            Assert.AreEqual(5, expense.Id);
+            Assert.AreEqual(5, expense.ExpenseId);
             
              
 

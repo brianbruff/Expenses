@@ -60,13 +60,14 @@
                         </tr>
                     </tbody>
                 </table>
-                
-             
-            <div id="expenseDetails" data-bind="visible: selectedExpense() != null">
+            </div>
+        </section>
+        
+        
+        <section data-bind="with: selectedReport">
+            <div id="expenseDetails" data-bind="visible: selectedExpense() != null ">
                 test
 
-            </div>
-        
             </div>
         </section>
         

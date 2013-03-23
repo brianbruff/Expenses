@@ -43,7 +43,6 @@ namespace Expenses.Web.Controllers.Api
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-
             if (expense.ExpenseReport.Employee.UserId != User.Identity.Name)
             {
                 // Trying to access a record that does not belong to the user

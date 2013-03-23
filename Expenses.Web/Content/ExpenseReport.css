@@ -7,18 +7,32 @@
 
 #expenseReportsList {
     float: left;
-    width: 150px;
+    width: 130px;
+    -moz-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    background-color: #ffc;
+    margin: 10px;
 }
 
 #expensesList {
     float: left;
-    width: 500px;
+    width: 480px;
+    -moz-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    background-color: #ffc;
+    margin: 10px;
 }
 
 #expenseDetails {
     float: left;
-    width: 300px;
-    background-color:#ffd800;
+    width: 280px;
+    -moz-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    background-color: #ffc;
+    margin: 10px;
 }
 
 #expensesTable th  {

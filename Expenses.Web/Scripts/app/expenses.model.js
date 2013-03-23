@@ -9,12 +9,19 @@
         // Persisted properties
         self.expenseId = data.expenseId;
         self.expenseReportId = data.expenseReportId;
-        self.date = moment(data.date).format("DD/MM/YYYY");
+        self.date = ko.observable(data.date);
         self.description = ko.observable(data.description);
+        self.currencyId = ko.observable(data.currencyId);
+        self.typeId = ko.observable(data.typeId);
+        self.image = ko.observable(data.image);
+        self.amount = ko.observable(data.amount);
         
 
         // Non-persisted properties
         self.errorMessage = ko.observable();
+        self.displayDate = ko.computed(function () {
+            return moment(data.date).format("DD/MM/YYYY");
+        });
 
         self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
@@ -51,7 +58,7 @@
             return self.date !== null;
         });
 
-        self.deleteTodo = function () {
+        self.deleteExpense = function () {
             var expense = this;
             return datacontext.deleteExpense(expense)
                  .done(function () { self.todos.remove(expense); });
@@ -73,16 +80,16 @@
                 });
     }
     expenseReport.prototype.addExpense = function () {
-        var self = this;
-        if (self.newTodoTitle()) { // need a title to save
-            var expense = datacontext.createExpense(
-                {
-                    title: self.newTodoTitle(),
-                    expenseReportId: self.expenseReportId
-                });
-            self.expenses.push(expense);
-            datacontext.saveNewExpense(expense);
-            self.newTodoTitle("");
-        }
+        //var self = this;
+        //if (self.newTodoTitle()) { // need a title to save
+        //    var expense = datacontext.createExpense(
+        //        {
+        //            description: self.description(),
+        //            expenseId: self.expenseId
+        //        });
+        //    self.expenses.push(expense);
+        //    datacontext.saveNewExpense(expense);
+        //    self.newTodoTitle("");
+        //}
     };
 })(ko, expensesApp.datacontext);

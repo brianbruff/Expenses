@@ -20,6 +20,8 @@ namespace Expenses.Web.Models
 
         public byte[] Image { get; set; }
 
+        public double Amount { get; set; }
+
         public Expense ToEntity()
         {
             return new Expense
@@ -28,7 +30,8 @@ namespace Expenses.Web.Models
                            CurrencyId = CurrencyId,
                            Description = Description,
                            TypeId = TypeId,
-                           //Image = Image,
+                           Amount = Amount,
+                           Image = Image,
                            Date = Date
                        };
         }

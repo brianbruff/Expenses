@@ -22,5 +22,7 @@ namespace Expenses.Model
         public int TypeId { get; set; }
         virtual public ExpenseType Type { get; set; }
 
+        public double Amount { get; set; }
+
     }
 }

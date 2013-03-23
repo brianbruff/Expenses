@@ -13,6 +13,7 @@
     box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
     background-color: #ffc;
     margin: 10px;
+    font-size: 0.8em;
 }
 
 #expensesList {
@@ -23,6 +24,7 @@
     box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
     background-color: #ffc;
     margin: 10px;
+    font-size: 0.8em;
 }
 
 #expenseDetails {
@@ -33,8 +35,46 @@
     box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
     background-color: #ffc;
     margin: 10px;
+    font-size: 0.8em;
 }
 
 #expensesTable th  {
    text-align: left;
+}
+
+.expensesList input[type=text], .addExpense {
+    width: 200px;
+    border: none;
+    background: none;
+}
+
+.todoList input[disabled] {
+    color: #666;
+    text-decoration: line-through;
+}
+
+.expensesList a {
+    color: silver;
+    text-decoration: none;
+    font: .8em verdana;
+}
+
+.addExpense {
+    padding: 0;
+    margin-left: 25px;
+    display: block;
+    color: #999;
+}
+
+.expenseInput {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 0.8em;
+    display: block;
+}
+
+
+input {
+    font-size: 0.8em;
 }

@@ -16,6 +16,7 @@ namespace Expenses.Model
         public int CurrencyId { get; set; }
         virtual public Currency Currency { get; set; }
 
+        //public int ExpenseReportId { get; set; }
         virtual public ExpenseReport ExpenseReport { get; set; }
 
         public int TypeId { get; set; }

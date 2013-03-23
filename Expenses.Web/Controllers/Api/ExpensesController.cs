@@ -20,12 +20,22 @@ namespace Expenses.Web.Controllers.Api
             
         }
 
-        public IQueryable<Expense> GetExpenses()
+        [Authorize(Roles="Admin")]
+        public IQueryable<ExpenseDto> GetExpenses()
         {
-            return Uow.Expenses.GetAll();
+            return Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetAll()
+                .Select(e => new ExpenseDto
+                {
+                    ExpenseId = e.Id,
+                    ExpenseReportId = e.ExpenseReport.Id,
+                    Date = e.Date,
+                    Description = e.Description,
+                    CurrencyId = e.CurrencyId,
+                    TypeId = e.TypeId,
+                });
         }
 
-        public Expense GetExpense(int id)
+        public ExpenseDto GetExpense(int id)
         {
             var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
             if (expense == null)
@@ -33,13 +43,23 @@ namespace Expenses.Web.Controllers.Api
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            
-            //if (expense.Employee.UserId != User.Identity.Name)
-            //{
-            //    // Trying to modify a record that does not belong to the user
-            //    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
-            //}
-            return null;
+
+            if (expense.ExpenseReport.Employee.UserId != User.Identity.Name)
+            {
+                // Trying to access a record that does not belong to the user
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
+            }
+
+            return new ExpenseDto
+            {
+                ExpenseId = expense.Id,
+                ExpenseReportId = expense.Id,
+                Date = expense.Date,
+                Description = expense.Description,
+                CurrencyId = expense.CurrencyId,
+                TypeId = expense.TypeId,
+                Image = expense.Image
+            };
         }
 
         // PUT api/Todo/5

@@ -13,10 +13,16 @@ namespace ExpensesTests
         {
             var expenseRepo = new Expenses.Data.Contracts.Fakes.StubIRepository<Expense>
                                   {
+                                      
                                       GetByIdInt32 =
                                           (id) =>
                                           new Expense {Id = id}, 
                                   };
+            IRepository<Expense> exp = expenseRepo as IRepository<Expense>;
+            expenseRepo.IncludeOf1ExpressionOfFuncOfT0M0 = (a, b) => exp;
+
+            var x = exp.Include(e => e.ExpenseReport);
+
             var uow = new Expenses.Data.Contracts.Fakes.StubIExpensesUow
                           {
                               ExpensesGet = () => expenseRepo

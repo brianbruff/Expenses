@@ -37,6 +37,7 @@ namespace Expenses.Web.Controllers.Api
 
         public ExpenseDto GetExpense(int id)
         {
+            
             var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
             if (expense == null)
             {

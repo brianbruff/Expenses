@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Security.Principal;
+using System.Threading;
+using System.Web;
+using System.Web.Mvc;
 using Expenses.Data.Contracts;
 using Expenses.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace ExpensesTests
 {
@@ -9,32 +14,39 @@ namespace ExpensesTests
     public class ExpenseControllerTest
     {
         [TestMethod]
-        public void TestGetById()
+        public void TestGetByIdMoq()
         {
-            var expenseRepo = new Expenses.Data.Contracts.Fakes.StubIRepository<Expense>
-                                  {
-                                      
-                                      GetByIdInt32 =
-                                          (id) =>
-                                          new Expense {Id = id}, 
-                                  };
-            IRepository<Expense> exp = expenseRepo as IRepository<Expense>;
-            //expenseRepo.IncludeOf1ExpressionOfFuncOfT0M0 = (a, b) => exp;
-
-            var x = exp.Include(e => e.ExpenseReport);
+            // Arrange
+            var expenseRepo = new Mock<IRepository<Expense>>();
+            expenseRepo.Setup(r => r.GetById(5)).Returns(
+                new Expense
+                {
+                    Id = 5,
+                    ExpenseReport = new ExpenseReport
+                    {
+                        Employee = new Employee { UserId = "TEST" }
+                    }
+                });
+            expenseRepo.Setup(r => r.Include(x => x.ExpenseReport.Employee)).Returns(expenseRepo.Object);
 
             var uow = new Expenses.Data.Contracts.Fakes.StubIExpensesUow
-                          {
-                              ExpensesGet = () => expenseRepo
-                          };
+            {
+                ExpensesGet = () => expenseRepo.Object
+            };
 
             var ctrlr = new Expenses.Web.Controllers.Api.ExpensesController(uow);
-            var expense = ctrlr.GetExpense(5);
-            Assert.AreEqual(5, expense.ExpenseId);
-            
+            var user = new Mock<IPrincipal>();
+            var identity = new Mock<IIdentity>();
+            user.Setup(x => x.Identity).Returns(identity.Object);
+            identity.Setup(x => x.Name).Returns("TEST");
+            Thread.CurrentPrincipal = user.Object;
              
+            // Act
+            var expense = ctrlr.GetExpense(5);
 
-
+            // Assert
+            Assert.AreEqual(5, expense.ExpenseId);
         }
+
     }
 }

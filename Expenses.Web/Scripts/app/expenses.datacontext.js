@@ -13,10 +13,27 @@ window.expensesApp.datacontext = (function () {
         saveChangedExpense: saveChangedExpense,
         saveChangedExpenseReport: saveChangedExpenseReport,
         deleteExpense: deleteExpense,
-        deleteExpenseReport: deleteExpenseReport
+        deleteExpenseReport: deleteExpenseReport,
+        getCurrencies: getCurrencies
     };
 
     return datacontext;
+    
+
+    function getCurrencies(currencies, errorObservable) {
+        return ajaxRequest("get", currencyUrl())
+            .done(getSucceeded)
+            .fail(getFailed);
+
+        function getSucceeded(data) {
+            var mappedCurrencies = $.map(data, function (list) { return new createCurrency(list); });
+            currencies = mappedCurrencies;
+        }
+
+        function getFailed() {
+            errorObservable("Error retrieving .");
+        }
+    }
 
     function getExpenseReports(expenseReportsObservable, errorObservable) {
         return ajaxRequest("get", expenseReportUrl())
@@ -59,10 +76,13 @@ window.expensesApp.datacontext = (function () {
         }
     }
     function createExpense(data) {
-        return new datacontext.expense(data); // expense is injected by todo.model.js
+        return new datacontext.expense(data); // expense is injected by expenses.model.js
     }
     function createExpenseReport(data) {
-        return new datacontext.expenseReport(data); // ExpenseReport is injected by todo.model.js
+        return new datacontext.expenseReport(data); // ExpenseReport is injected by expenses.model.js
+    }
+    function createCurrency(data) {
+        return new datacontext.currency(data); // currency is injected by expenses.model.js
     }
     function saveNewExpense(expense) {
         clearErrorMessage(expense);
@@ -133,5 +153,6 @@ window.expensesApp.datacontext = (function () {
     // routes
     function expenseReportUrl(id) { return "/api/ExpenseReports/" + (id || ""); }
     function expenseUrl(id) { return "/api/Expenses/" + (id || ""); }
+    function currencyUrl(id) { return "/api/Currencies/" + (id || ""); }
 
 })();

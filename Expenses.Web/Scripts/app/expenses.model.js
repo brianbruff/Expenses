@@ -1,6 +1,8 @@
 ﻿(function (ko, datacontext) {
+    // Inject the models
     datacontext.expense = expense;
     datacontext.expenseReport = expenseReport;
+    datacontext.currency = currency;
 
     function expense(data) {
         var self = this;
@@ -92,4 +94,16 @@
         //    self.newTodoTitle("");
         //}
     };
+    
+
+    function currency(data) {
+        var self = this;
+        data = data || {};
+
+        // Persisted properties
+        self.currencyId = data.currencyId;
+        self.code = data.code;
+    };
+
+
 })(ko, expensesApp.datacontext);

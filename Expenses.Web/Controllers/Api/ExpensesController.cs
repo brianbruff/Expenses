@@ -6,12 +6,13 @@ using System.Web.Http;
 using Expenses.Data;
 using Expenses.Data.Contracts;
 using Expenses.Model;
+using Expenses.Web.Filters;
 using Expenses.Web.Models;
 
 namespace Expenses.Web.Controllers.Api
 {
     [Authorize]
-    //[ValidateHttpAntiForgeryToken]
+    [ValidateHttpAntiForgeryToken]
     public class ExpensesController : ApiControllerBase
     {
         public ExpensesController(IExpensesUow uow)
@@ -37,7 +38,6 @@ namespace Expenses.Web.Controllers.Api
 
         public ExpenseDto GetExpense(int id)
         {
-            
             var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
             if (expense == null)
             {

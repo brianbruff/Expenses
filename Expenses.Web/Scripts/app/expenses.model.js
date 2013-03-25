@@ -112,7 +112,7 @@
 
         // Persisted properties
         self.expenseTypeId = data.id;
-        self.code = data.code;
+        self.code = data.name;
     };
 
 

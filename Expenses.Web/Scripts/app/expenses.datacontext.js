@@ -21,14 +21,14 @@ window.expensesApp.datacontext = (function () {
     return datacontext;
     
 
-    function getCurrencies(currencies, errorObservable) {
+    function getCurrencies(currenciesObservable, errorObservable) {
         return ajaxRequest("get", currencyUrl())
             .done(getSucceeded)
             .fail(getFailed);
 
         function getSucceeded(data) {
             var mappedCurrencies = $.map(data, function (list) { return new createCurrency(list); });
-            currencies = mappedCurrencies;
+            currenciesObservable(mappedCurrencies);
         }
 
         function getFailed() {
@@ -36,14 +36,14 @@ window.expensesApp.datacontext = (function () {
         }
     }
     
-    function getExpenseTypes(expenseTypes, errorObservable) {
+    function getExpenseTypes(expenseTypesObservable, errorObservable) {
         return ajaxRequest("get", expenseTypesUrl())
             .done(getSucceeded)
             .fail(getFailed);
 
         function getSucceeded(data) {
             var mappedExpenseTypes = $.map(data, function (list) { return new createExpenseType(list); });
-            expenseTypes = mappedExpenseTypes;
+            expenseTypesObservable(mappedExpenseTypes);
         }
 
         function getFailed() {

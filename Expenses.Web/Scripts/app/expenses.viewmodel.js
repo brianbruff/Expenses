@@ -1,8 +1,7 @@
 ﻿window.expensesApp.ExpenseReportViewModel = (function (ko, datacontext) {
-    /// <field name="expenseReports" value="[new datacontext.expenseReport()]"></field>
     var expenseReports = ko.observableArray(),
-        currencies = [],
-        expenseTypes = [],
+        currencies = ko.observableArray(),       
+        expenseTypes = ko.observableArray(),
         error = ko.observable(),
         selectedReport = ko.observable(),
         getReport = function(expenseReportId) {
@@ -43,6 +42,8 @@
         selectedReport: selectedReport,
         getReport: getReport,
         expenseReports: expenseReports,
+        currencies: currencies,
+        expenseTypes: expenseTypes,
         error: error,
         addExpenseReport: addExpenseReport,
         deleteExpenseReport: deleteExpenseReport

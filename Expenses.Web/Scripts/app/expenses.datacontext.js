@@ -14,7 +14,8 @@ window.expensesApp.datacontext = (function () {
         saveChangedExpenseReport: saveChangedExpenseReport,
         deleteExpense: deleteExpense,
         deleteExpenseReport: deleteExpenseReport,
-        getCurrencies: getCurrencies
+        getCurrencies: getCurrencies,
+        getExpenseTypes: getExpenseTypes
     };
 
     return datacontext;
@@ -28,6 +29,21 @@ window.expensesApp.datacontext = (function () {
         function getSucceeded(data) {
             var mappedCurrencies = $.map(data, function (list) { return new createCurrency(list); });
             currencies = mappedCurrencies;
+        }
+
+        function getFailed() {
+            errorObservable("Error retrieving .");
+        }
+    }
+    
+    function getExpenseTypes(expenseTypes, errorObservable) {
+        return ajaxRequest("get", expenseTypesUrl())
+            .done(getSucceeded)
+            .fail(getFailed);
+
+        function getSucceeded(data) {
+            var mappedExpenseTypes = $.map(data, function (list) { return new createExpenseType(list); });
+            expenseTypes = mappedExpenseTypes;
         }
 
         function getFailed() {
@@ -84,6 +100,12 @@ window.expensesApp.datacontext = (function () {
     function createCurrency(data) {
         return new datacontext.currency(data); // currency is injected by expenses.model.js
     }
+    
+    function createExpenseType(data) {
+        return new datacontext.expenseType(data); // currency is injected by expenses.model.js
+    }
+    
+
     function saveNewExpense(expense) {
         clearErrorMessage(expense);
         return ajaxRequest("post", expenseUrl(), expense)
@@ -154,5 +176,6 @@ window.expensesApp.datacontext = (function () {
     function expenseReportUrl(id) { return "/api/ExpenseReports/" + (id || ""); }
     function expenseUrl(id) { return "/api/Expenses/" + (id || ""); }
     function currencyUrl(id) { return "/api/Currencies/" + (id || ""); }
+    function expenseTypesUrl(id) { return "/api/ExpenseTypes/" + (id || ""); }
 
 })();

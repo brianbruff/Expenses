@@ -3,6 +3,7 @@
     datacontext.expense = expense;
     datacontext.expenseReport = expenseReport;
     datacontext.currency = currency;
+    datacontext.expenseType = expenseType;
 
     function expense(data) {
         var self = this;
@@ -101,7 +102,16 @@
         data = data || {};
 
         // Persisted properties
-        self.currencyId = data.currencyId;
+        self.currencyId = data.id;
+        self.code = data.code;
+    };
+    
+    function expenseType(data) {
+        var self = this;
+        data = data || {};
+
+        // Persisted properties
+        self.expenseTypeId = data.id;
         self.code = data.code;
     };
 

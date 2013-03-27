@@ -98,7 +98,13 @@
     <Fakes Include="Fakes\Expenses.Data.Contracts.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\qunit.css" />
+    <Content Include="Javascript Tests\qUnit.css" />
+    <Content Include="Javascript Tests\qunit.js" />
+    <Content Include="Javascript Tests\tests.html" />
+    <Content Include="Javascript Tests\tests.js" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

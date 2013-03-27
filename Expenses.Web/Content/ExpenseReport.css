@@ -78,3 +78,16 @@
 input {
     font-size: 0.8em;
 }
+
+.uploadImageLink {
+    background-image:url('../Images/uploadLink.png');
+    display: block;
+    width: 170px;
+    background-repeat: no-repeat;
+    
+}
+
+.uploadImageLink i {
+    padding-left: 30px;
+    color: black;
+}

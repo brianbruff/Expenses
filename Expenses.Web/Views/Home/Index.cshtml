@@ -29,7 +29,7 @@
         <section>
             <div id="expenseReportsList" data-bind="visible: expenseReports().length > 0">
                 <table>
-                    <tbody data-bind="foreach: expenseReports()">
+                    <tbody data-bind="foreach: expenseReports">
                         <tr data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor:pointer" >
                             <td data-bind="text: name"></td>
                         </tr>

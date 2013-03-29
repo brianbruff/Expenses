@@ -52,15 +52,20 @@
         self.date = ko.observable(data.date);
         self.expenses = ko.observableArray(importExpenses(data.expenses));
         self.selectedExpense = ko.observable();
-        self.tableVisible = ko.observable(true);
+        self.expenseVisible = ko.observable(false);
+        self.reportVisible = ko.observable(true);
         
         self.getExpense = function (expense) {
-            self.tableVisible(false);
-            datacontext.getExpense(expense.expenseId, self.selectedExpense, self.errorMessage);
+            datacontext.getExpense(expense.expenseId, self.selectedExpense, self.errorMessage, function() {
+                self.expenseVisible(true);
+                self.reportVisible(false);
+            });
         };
         
         self.done = function () {
-            self.tableVisible(true);
+            self.expenseVisible(false);
+            self.reportVisible(true);
+            self.selectedExpense(null);
         };
 
         // Non-persisted properties

@@ -25,6 +25,7 @@ window.expensesApp.datacontext = (function () {
         return ajaxRequest("get", currencyUrl())
             .done(getSucceeded)
             .fail(getFailed);
+            
 
         function getSucceeded(data) {
             var mappedCurrencies = $.map(data, function (list) { return new createCurrency(list); });
@@ -78,10 +79,12 @@ window.expensesApp.datacontext = (function () {
             errorObservable("Error retrieving expense reports.");
         }
     }
-    function getExpense(expenseId, expenseObservable, errorObservable) {
+    function getExpense(expenseId, expenseObservable, errorObservable, onComplete) {
         return ajaxRequest("get", expenseUrl() + "/" + expenseId)
             .done(getSucceeded)
-            .fail(getFailed);
+            .fail(getFailed)
+            .complete(onComplete);
+
 
         function getSucceeded(data) {
             //reportExpenseListObservable(expenseObservable); // todo: set the image

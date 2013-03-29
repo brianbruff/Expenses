@@ -70,6 +70,24 @@ ko.bindingHandlers.placeholder = {
 };
 
 
+/** Binding to make content appear with 'fade' effect */
+ko.bindingHandlers['fadeIn'] = {
+    'update': function (element, valueAccessor) {
+        var options = valueAccessor();
+        if (options() === true)
+            $(element).slideDown();
+    }
+};
+/** Binding to make content disappear with 'fade' effect */
+ko.bindingHandlers['fadeOut'] = {
+    'update': function (element, valueAccessor) {
+        var options = valueAccessor();
+        if (options() === true)
+            $(element).slideUp();
+    }
+};
+
+
 ko.bindingHandlers.datepicker = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         //initialize datepicker with some optional options

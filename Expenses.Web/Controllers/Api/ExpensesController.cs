@@ -1,13 +1,10 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using Expenses.Data.Contracts;
+using Expenses.Web.Filters;
+using Expenses.Web.Models;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Expenses.Data;
-using Expenses.Data.Contracts;
-using Expenses.Model;
-using Expenses.Web.Filters;
-using Expenses.Web.Models;
 
 namespace Expenses.Web.Controllers.Api
 {
@@ -33,6 +30,7 @@ namespace Expenses.Web.Controllers.Api
                     Description = e.Description,
                     CurrencyId = e.CurrencyId,
                     TypeId = e.TypeId,
+                    Amount = e.Amount
                 });
         }
 
@@ -167,10 +165,13 @@ namespace Expenses.Web.Controllers.Api
         //    return Request.CreateResponse(HttpStatusCode.OK, expenseDto);
         //}
 
-        protected override void Dispose(bool disposing)
-        {
-           // db.Dispose();
-            base.Dispose(disposing);
-        }
+        //private byte[] ConvertImageToBytes()
+        //{
+        //    using (MemoryStream ms = new MemoryStream())
+        //    {
+        //        file.InputStream.CopyTo(ms);
+        //        byte[] array = ms.GetBuffer();
+        //    }
+        //}
     }
 }

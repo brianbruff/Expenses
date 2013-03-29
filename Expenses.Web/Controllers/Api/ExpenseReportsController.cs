@@ -58,7 +58,7 @@ namespace Expenses.Web.Controllers.Api
                                                                                Description = e.Description,
                                                                                CurrencyId = e.CurrencyId,
                                                                                TypeId = e.TypeId,
-                                                                               //Image = e.Image
+                                                                               Amount = e.Amount
                                                                            }).AsQueryable()
                                  };
 

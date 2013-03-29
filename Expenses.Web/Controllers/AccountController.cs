@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Transactions;
 using System.Web.Http;
@@ -106,8 +109,31 @@ namespace Expenses.Web.Controllers
             uow.ExpenseReports.Add(report);
             uow.Commit();
 
+            byte[] defaultImazge = null;
+            using (var ms = new MemoryStream())
+            {
+                Properties.Resources.defaultExpense.Save(ms, ImageFormat.Jpeg);
+                defaultImazge = ms.ToArray();
+            }
+
             // todo: remove this in production
-            report.Expenses.Add(new Model.Expense { Currency = euro, Date = DateTime.Now.Date, Description = "Taxi DGL => Buckingham", Type = uow.ExpenseTypes.GetById(1) });
+            report.Expenses.Add(new Model.Expense
+                                    {
+                                        Image = defaultImazge,
+                                        Currency = euro, Date = DateTime.Now.Date,
+                                        Description = "Taxi DGL => Buckingham", 
+                                        Type = uow.ExpenseTypes.GetById(1),
+                                        Amount = 56
+                                    });
+            report.Expenses.Add(new Model.Expense
+            {
+                Image = defaultImazge,
+                Currency = euro,
+                Date = DateTime.Now.Date,
+                Description = "Lunch",
+                Type = uow.ExpenseTypes.GetById(2),
+                Amount = 12.4
+            });
             uow.Commit();
             
         }

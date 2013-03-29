@@ -91,3 +91,8 @@ input {
     padding-left: 30px;
     color: black;
 }
+
+#expenseDetails img {
+    width : 200px;
+    height: 200px;
+}

@@ -16,7 +16,7 @@
         self.description = ko.observable(data.description);
         self.currencyId = ko.observable(data.currencyId);
         self.typeId = ko.observable(data.typeId);
-        self.image = ko.observable(data.image);
+        self.image = ko.observable('data:image/jpg;base64,'+data.image);
         self.amount = ko.observable(data.amount);
         
 

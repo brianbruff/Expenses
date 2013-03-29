@@ -56,7 +56,8 @@ namespace Expenses.Web.Controllers.Api
                 Description = expense.Description,
                 CurrencyId = expense.CurrencyId,
                 TypeId = expense.TypeId,
-                Image = expense.Image
+                Image = expense.Image,
+                Amount = expense.Amount
             };
         }
 

@@ -84,6 +84,7 @@ window.expensesApp.datacontext = (function () {
             .fail(getFailed);
 
         function getSucceeded(data) {
+            //reportExpenseListObservable(expenseObservable); // todo: set the image
             expenseObservable(createExpense(data));
         }
 

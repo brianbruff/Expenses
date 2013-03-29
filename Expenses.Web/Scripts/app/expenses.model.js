@@ -18,6 +18,11 @@
         self.typeId = ko.observable(data.typeId);
         self.image = ko.observable('data:image/jpg;base64,'+data.image);
         self.amount = ko.observable(data.amount);
+        self.exchangeRate = ko.observable(data.exchangeRate);
+        
+        self.baseAmount = ko.computed(function () {
+            return self.amount() * self.exchangeRate();
+        });
         
 
         // Non-persisted properties
@@ -59,6 +64,14 @@
         // Non-persisted properties
         self.isSubmitted = ko.computed(function () {
             return self.date !== null;
+        });
+
+        self.baseTotal = ko.computed(function () {
+            var total = 0;
+            $.each(self.expenses(), function (e) {
+                 total += this.baseAmount();
+            });
+            return total;
         });
 
         self.deleteExpense = function () {

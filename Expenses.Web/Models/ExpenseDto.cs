@@ -22,6 +22,9 @@ namespace Expenses.Web.Models
 
         public double Amount { get; set; }
 
+        public float ExchangeRate { get; set; }
+        
+
         public Expense ToEntity()
         {
             return new Expense
@@ -31,6 +34,7 @@ namespace Expenses.Web.Models
                            Description = Description,
                            TypeId = TypeId,
                            Amount = Amount,
+                           ExchangeRate = ExchangeRate,
                            Image = Image,
                            Date = Date
                        };

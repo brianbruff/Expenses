@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICurrencyProvider.cs" />
     <Compile Include="IExpensesRepository.cs" />
     <Compile Include="IExpensesUow.cs" />
     <Compile Include="IRepository.cs" />

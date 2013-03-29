@@ -16,6 +16,11 @@ namespace Expenses.Web.Controllers.Api
         
         public float Get(string baseIso, string targetIso, DateTime exchangeDate)
         {
+            if (_currencyProvider == null)
+                return 1;
+            if (string.Compare(baseIso, targetIso, System.StringComparison.OrdinalIgnoreCase) == 0)
+                return 1;
+                
             return _currencyProvider != null ? _currencyProvider.GetExchangeRate(baseIso, targetIso, exchangeDate) : 1;
         }
 

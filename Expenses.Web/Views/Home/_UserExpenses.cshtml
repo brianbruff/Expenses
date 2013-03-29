@@ -38,13 +38,16 @@
                         <tr data-bind="click: $parent.getExpense, attr: { expenseId: expenseId }" style="cursor:pointer" >
                             <td data-bind="text: displayDate"></td>
                             <td data-bind="text: description"></td>
-                            <td data-bind="text: amount"></td>
+                            <td data-bind="text: baseAmount"></td>
                         </tr>
                     </tbody>
                 </table>
                 <form data-bind="submit: addExpense">
                     <input class="addExpense" type="text" data-bind="value: selectedExpense.name, placeholder: 'Type here to add', blurOnEnter: true, event: { blur: addExpense }" />
                 </form>
+                
+                <p>Grand Total: <span data-bind='text: baseTotal()'></span></p>
+                
             </div>
         </section>
         

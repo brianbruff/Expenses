@@ -79,15 +79,15 @@ window.expensesApp.datacontext = (function () {
             errorObservable("Error retrieving expense reports.");
         }
     }
-    function getExpense(expenseId, expenseObservable, errorObservable) {
-        return ajaxRequest("get", expenseUrl() + "/" + expenseId)
+    function getExpense(expenseObj, expenseObservable, errorObservable) {
+        expenseObservable(expenseObj);
+        return ajaxRequest("get", expenseUrl() + "/" + expenseObj.expenseId)
             .done(getSucceeded)
             .fail(getFailed);
 
 
         function getSucceeded(data) {
-            //reportExpenseListObservable(expenseObservable); // todo: set the image
-            expenseObservable(createExpense(data));
+            expenseObservable().image('data:image/jpg;base64,' + data.image);
         }
 
         function getFailed() {

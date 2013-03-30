@@ -28,7 +28,7 @@
         // Non-persisted properties
         self.errorMessage = ko.observable();
         self.displayDate = ko.computed(function () {
-            return moment(data.date).format("DD/MM/YYYY");
+            return moment(self.date()).format("DD/MM/YYYY");
         });
 
         self.saveChanges = function () {
@@ -56,7 +56,7 @@
         
         self.getExpense = function (expense) {
             self.reportVisible(false);
-            datacontext.getExpense(expense.expenseId, self.selectedExpense, self.errorMessage);
+            datacontext.getExpense(expense, self.selectedExpense, self.errorMessage);
         };
         
         self.done = function () {

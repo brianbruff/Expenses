@@ -36,7 +36,7 @@
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: expenses()">
-                            <tr data-bind="click: $parent.getExpense, attr: { expenseId: expenseId }" style="cursor:pointer" >
+                            <tr data-bind="click: $parent.getExpense" style="cursor:pointer" >
                                 <td data-bind="text: displayDate"></td>
                                 <td data-bind="text: description"></td>
                                 <td data-bind="text: baseAmount"></td>
@@ -54,36 +54,28 @@
                     <div id="expenseDetails" >
                         <a href="#" data-bind="click: $parent.done">Done</a>
                         <br />
-                        
-                        <div>
-                            <label for="expenseDate">Date:</label>
-                            <input id="expenseDate" type="text" data-bind="datepicker: date, datepickerOptions: { dateFormat: 'DD, d MM, yy' }, blurOnEnter: true, event: { blur: $parent.addExpense }" />
-                        </div>
-                        <div>
-                            <label>Description:</label>
-                            <input type="text" data-bind="value: description, placeholder: 'Type Expense Name', blurOnEnter: true, event: { blur: $parent.addExpense }" />
-                        </div>
-                        <div>
-                            <label>Currency</label>
-                            <select data-bind="options: $root.currencies, optionsText: 'code', optionsValue: 'currencyId', value: currencyId"></select>
-                        </div>
-                        <div>
-                            <label>Amount</label>
-                            <input type="text" data-bind="value: amount, blurOnEnter: true, event: { blur: $parent.addExpense }" />
-                        </div>
-                        <div>
-                            <label>Type</label>
-                            <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
-                        </div>
-                        <div>
-                            <img data-bind="attr: { src: image }" alt="Expense image" />
-                        </div>
-                        <div class="uploadImageLink">
-                            <input type="file" style="float: left" />
-                            <input type="button" title="Upload" value="Upload" style="float: left" />
-                        </div>
+
+                        <label for="expenseDate">Date:</label>
+                        <input id="expenseDate" type="text" class="expenseInput" data-bind="datepicker: date, datepickerOptions: { dateFormat: 'DD, d MM, yy' }, blurOnEnter: true, event: { blur: $parent.addExpense }" />
+                        <label>Description:</label>
+                        <input type="text" class="expenseInput" data-bind="value: description, placeholder: 'Type Expense Name', blurOnEnter: true, event: { blur: $parent.addExpense }" />
+                        <label>Currency</label>
+                        <select data-bind="options: $root.currencies, optionsText: 'code', optionsValue: 'currencyId', value: currencyId"></select>
+                        <br />
+                        <label>Amount</label>
+                        <input type="text" class="expenseInput" data-bind="value: amount, blurOnEnter: true, event: { blur: $parent.addExpense }" />
+                        <label>Type</label>
+                        <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
+                        <img data-bind="attr: { src: image }" alt="Expense image" />
+                        <a href="#">
+                            <span class="uploadImageLink">
+                                <i>Upload Image</i>
+                            </span>
+                        </a>
+                
+                    
                     </div>
-                </div>
+                    </div>
             </div>
         </section>
     </div>

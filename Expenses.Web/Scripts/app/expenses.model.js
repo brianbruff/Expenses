@@ -52,18 +52,14 @@
         self.date = ko.observable(data.date);
         self.expenses = ko.observableArray(importExpenses(data.expenses));
         self.selectedExpense = ko.observable();
-        self.expenseVisible = ko.observable(false);
         self.reportVisible = ko.observable(true);
         
         self.getExpense = function (expense) {
-            datacontext.getExpense(expense.expenseId, self.selectedExpense, self.errorMessage, function() {
-                self.expenseVisible(true);
-                self.reportVisible(false);
-            });
+            self.reportVisible(false);
+            datacontext.getExpense(expense.expenseId, self.selectedExpense, self.errorMessage);
         };
         
         self.done = function () {
-            self.expenseVisible(false);
             self.reportVisible(true);
             self.selectedExpense(null);
         };

@@ -71,19 +71,44 @@ ko.bindingHandlers.placeholder = {
 
 
 /** Binding to make content appear with 'fade' effect */
-ko.bindingHandlers['fadeIn'] = {
-    'update': function (element, valueAccessor) {
-        var options = valueAccessor();
-        if (options() === true)
-            $(element).slideDown();
-    }
-};
-/** Binding to make content disappear with 'fade' effect */
-ko.bindingHandlers['fadeOut'] = {
-    'update': function (element, valueAccessor) {
-        var options = valueAccessor();
-        if (options() === true)
-            $(element).slideUp();
+//ko.bindingHandlers['fadeIn'] = {
+//    'update': function (element, valueAccessor) {
+//        var options = valueAccessor();
+//        if (options() === true)
+//            $(element).slideDown();
+//    }
+//};
+///** Binding to make content disappear with 'fade' effect */
+//ko.bindingHandlers['fadeOut'] = {
+//    'update': function (element, valueAccessor) {
+//        var options = valueAccessor();
+//        if (options() === true)
+//            $(element).slideUp();
+//    }
+//};
+
+var previousElement = null;
+ko.bindingHandlers.fadeSwitcher = {
+    init: function (element, valueAccessor) {
+        //var value = valueAccessor();
+        //$(element).toggle(ko.utils.unwrapObservable(value));
+    },
+    update: function (element, valueAccessor) {
+
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        if (value) {
+            if (previousElement == null) { // initial fade
+                $(element).fadeIn();
+            } else {
+                $(previousElement).fadeOut('slow', function () {
+                    $(element).fadeIn();
+                });
+            }
+            previousElement = element;
+        } else {
+            $(element).fadeOut('slow');
+        }
+            
     }
 };
 

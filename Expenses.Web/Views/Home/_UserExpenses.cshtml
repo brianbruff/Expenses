@@ -26,7 +26,7 @@
     
         <section>
             <div id="expensesList" data-bind="with:selectedReport">
-                <div data-bind="fadeOut: expenseVisible, fadeIn: reportVisible"> 
+                <div data-bind="fadeSwitcher: reportVisible"> 
                     <table id="expensesTable" >
                         <thead>
                             <tr>
@@ -51,7 +51,7 @@
                     <p>Grand Total: <span data-bind='text: baseTotal()'></span></p>
                 </div>
                 <div data-bind="with: selectedExpense">
-                    <div id="expenseDetails" data-bind="fadeIn: $parent.expenseVisible, fadeOut: $parent.reportVisible ">
+                    <div id="expenseDetails" >
                         <a href="#" data-bind="click: $parent.done">Done</a>
                         <br />
 

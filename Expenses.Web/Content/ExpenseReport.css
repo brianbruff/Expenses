@@ -27,16 +27,6 @@
     font-size: 0.8em;
 }
 
-/*#expenseDetails {
-    float: left;
-    width: 280px;
-    -moz-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
-    -webkit-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
-    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
-    background-color: #ffc;
-    margin: 10px;
-    font-size: 0.8em;
-}*/
 
 #expensesTable th  {
    text-align: left;
@@ -66,13 +56,6 @@
     color: #999;
 }
 
-.expenseInput {
-    outline: none;
-    border: none;
-    background: none;
-    font-size: 0.8em;
-    display: block;
-}
 
 
 input {
@@ -87,12 +70,22 @@ input {
     
 }
 
-.uploadImageLink i {
-    padding-left: 30px;
-    color: black;
+#expenseDetails {
+    padding: 10px;
+}
+
+#expenseDetails label {
+    font: bold;
 }
 
 #expenseDetails img {
     width : 200px;
     height: 200px;
+}
+
+#expenseDetails input {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 0.8em;
 }

@@ -66,7 +66,8 @@
                         <input type="text" class="expenseInput" data-bind="value: amount, blurOnEnter: true, event: { blur: $parent.addExpense }" />
                         <label>Type</label>
                         <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
-                        <img data-bind="attr: { src: image }" alt="Expense image" />
+                        <img data-bind="img: { src: image, busy: '/Images/busy.gif', fallback:'/Images/question.gif' }" alt="Expense image" />
+                        
                         <a href="#">
                             <span class="uploadImageLink">
                                 <i>Upload Image</i>

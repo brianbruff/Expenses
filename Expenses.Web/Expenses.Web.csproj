@@ -296,6 +296,7 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\busy.gif" />
     <Content Include="Images\defaultExpense.JPG" />
+    <Content Include="Images\question.gif" />
     <Content Include="Images\uploadLink.png" />
     <Content Include="Scripts\app\expenses.bindings.js" />
     <Content Include="Scripts\app\expenses.datacontext.js" />

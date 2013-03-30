@@ -134,6 +134,14 @@ namespace Expenses.Web.Controllers
                 Type = uow.ExpenseTypes.GetById(2),
                 Amount = 12.4
             });
+            report.Expenses.Add(new Model.Expense
+            {
+                Currency = euro,
+                Date = DateTime.Now.Date,
+                Description = "NoImage",
+                Type = uow.ExpenseTypes.GetById(2),
+                Amount = 7.4
+            });
             uow.Commit();
             
         }

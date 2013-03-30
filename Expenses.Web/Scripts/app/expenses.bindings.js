@@ -14,7 +14,7 @@ ko.bindingHandlers.img = {
             $element = $(element);
 
         //now set the src attribute to either the bound or the fallback value
-        if (src) {
+        if (src !== "data:image/jpg;base64,null") {
             $element.attr("src", src);
         } else {
             $element.attr("src", fallback);

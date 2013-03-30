@@ -12,7 +12,7 @@
         // Persisted properties
         self.expenseId = data.expenseId;
         self.expenseReportId = data.expenseReportId;
-        self.date = ko.observable(data.date);
+        self.date = ko.observable(new Date(data.date));
         self.description = ko.observable(data.description);
         self.currencyId = ko.observable(data.currencyId);
         self.typeId = ko.observable(data.typeId);

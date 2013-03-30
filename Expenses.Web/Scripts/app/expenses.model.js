@@ -16,7 +16,7 @@
         self.description = ko.observable(data.description);
         self.currencyId = ko.observable(data.currencyId);
         self.typeId = ko.observable(data.typeId);
-        self.image = ko.observable('data:image/jpg;base64,'+data.image);
+        self.image = ko.observable(data.image);
         self.amount = ko.observable(data.amount);
         self.exchangeRate = ko.observable(data.exchangeRate);
         
@@ -30,6 +30,9 @@
         self.displayDate = ko.computed(function () {
             return moment(self.date()).format("DD/MM/YYYY");
         });
+        self.imageSrc = ko.computed(function () {
+            return 'data:image/jpg;base64,' + self.image();
+        });
 
         self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
@@ -39,7 +42,16 @@
         ///self.isDone.subscribe(saveChanges);
         self.description.subscribe(self.saveChanges);
 
-        self.toJson = function () { return ko.toJSON(self) };
+        self.toJson = function () {
+            var json = ko.toJSON(self, function(key,value) {
+                if (key !== 'image')
+                    return value;
+                return null;
+            });
+            // we don't send the image here, it's done on it's own
+            
+            return json;
+        };
     };
 
     function expenseReport(data) {
@@ -54,9 +66,9 @@
         self.selectedExpense = ko.observable();
         self.reportVisible = ko.observable(true);
         
-        self.getExpense = function (expense) {
+        self.getExpenseImage = function (expense) {
             self.reportVisible(false);
-            datacontext.getExpense(expense, self.selectedExpense, self.errorMessage);
+            datacontext.getExpenseImage(expense, self.selectedExpense, self.errorMessage);
         };
         
         self.done = function () {

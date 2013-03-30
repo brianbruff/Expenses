@@ -18,15 +18,15 @@ namespace Expenses.Web.Models
 
         public IQueryable<ExpenseDto> Expenses { get; set; }
 
-        public ExpenseReport ToEntity()
-        {
-            return new ExpenseReport
-                       {
-                           Id = ExpenseReportId,
-                           Name = Name,
-                           Date = Date,
-                           Expenses = Expenses.Select(e => e.ToEntity()).ToList()
-                       };
-        }
+        //public ExpenseReport ToEntity()
+        //{
+        //    return new ExpenseReport
+        //               {
+        //                   Id = ExpenseReportId,
+        //                   Name = Name,
+        //                   Date = Date,
+        //                   Expenses = Expenses.Select(e => e.ToEntity()).ToList()
+        //               };
+        //}
     }
 }

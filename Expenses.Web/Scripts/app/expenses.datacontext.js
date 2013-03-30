@@ -5,7 +5,7 @@ window.expensesApp.datacontext = (function () {
     var datacontext = {
         getExpenseReports: getExpenseReports,
         getExpenseReport: getExpenseReport,
-        getExpense: getExpense,
+        getExpenseImage: getExpenseImage,
         createExpense: createExpense,
         createExpenseReport: createExpenseReport,
         saveNewExpense: saveNewExpense,
@@ -79,15 +79,15 @@ window.expensesApp.datacontext = (function () {
             errorObservable("Error retrieving expense reports.");
         }
     }
-    function getExpense(expenseObj, expenseObservable, errorObservable) {
+    function getExpenseImage(expenseObj, expenseObservable, errorObservable) {
         expenseObservable(expenseObj);
-        return ajaxRequest("get", expenseUrl() + "/" + expenseObj.expenseId)
+        return ajaxRequest("get", expenseImageUrl() + "/" + expenseObj.expenseId)
             .done(getSucceeded)
             .fail(getFailed);
 
 
         function getSucceeded(data) {
-            expenseObservable().image('data:image/jpg;base64,' + data.image);
+            expenseObservable().image(data.image);
         }
 
         function getFailed() {
@@ -146,14 +146,14 @@ window.expensesApp.datacontext = (function () {
         clearErrorMessage(expense);
         return ajaxRequest("put", expenseUrl(expense.expenseId), expense, "text")
             .fail(function () {
-                expense.errorMessage("Error updating todo item.");
+                expense.errorMessage("Error updating expense item.");
             });
     }
     function saveChangedExpenseReport(expenseReport) {
         clearErrorMessage(expenseReport);
         return ajaxRequest("put", expenseReportUrl(expenseReport.expenseReportId), expenseReport, "text")
             .fail(function () {
-                expenseReport.errorMessage("Error updating the todo list title. Please make sure it is non-empty.");
+                expenseReport.errorMessage("Error updating the expense report.");
             });
     }
 
@@ -178,6 +178,7 @@ window.expensesApp.datacontext = (function () {
     // routes
     function expenseReportUrl(id) { return "/api/ExpenseReports/" + (id || ""); }
     function expenseUrl(id) { return "/api/Expenses/" + (id || ""); }
+    function expenseImageUrl(id) { return "/api/ExpenseImage/" + (id || ""); }
     function currencyUrl(id) { return "/api/Currencies/" + (id || ""); }
     function expenseTypesUrl(id) { return "/api/ExpenseTypes/" + (id || ""); }
 

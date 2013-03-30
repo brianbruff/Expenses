@@ -2,7 +2,6 @@
 using Expenses.Model;
 
 namespace Expenses.Web.Models
-
 {
     public class ExpenseDto
     {
@@ -23,21 +22,18 @@ namespace Expenses.Web.Models
         public double Amount { get; set; }
 
         public float ExchangeRate { get; set; }
-        
 
-        public Expense ToEntity()
+
+        public void UpdateEntity(Expense expense)
         {
-            return new Expense
-                       {
-                           Id = ExpenseId,
-                           CurrencyId = CurrencyId,
-                           Description = Description,
-                           TypeId = TypeId,
-                           Amount = Amount,
-                           ExchangeRate = ExchangeRate,
-                           Image = Image,
-                           Date = Date
-                       };
+            expense.CurrencyId = CurrencyId;
+            expense.Currency = null;
+            expense.Description = Description;
+            expense.Description = Description;
+            expense.TypeId = TypeId;
+            expense.Amount = Amount;
+            expense.ExchangeRate = ExchangeRate;
+            expense.Date = Date;
         }
     }
 }

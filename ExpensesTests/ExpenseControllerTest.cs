@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Expenses.Data.Contracts;
 using Expenses.Model;
+using Expenses.Web.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -42,10 +43,10 @@ namespace ExpensesTests
             Thread.CurrentPrincipal = user.Object;
              
             // Act
-            var expense = ctrlr.GetExpense(5);
+            var response = ctrlr.PutExpense(1, new ExpenseDto { ExpenseId = 5});
 
             // Assert
-            Assert.AreEqual(5, expense.ExpenseId);
+            Assert.AreEqual(5, response.StatusCode == System.Net.HttpStatusCode.BadRequest);
         }
 
     }

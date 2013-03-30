@@ -58,7 +58,7 @@ ko.bindingHandlers.blurOnEnter = {
         $(elem).keypress(function (evt) {
             if (evt.keyCode === 13 /* enter */) {
                 evt.preventDefault();
-                $(elem).triggerHandler("change");
+                //$(elem).triggerHandler("change");
                 $(elem).blur();
             }
         });

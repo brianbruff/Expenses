@@ -39,8 +39,11 @@
         };
 
         // Auto-save when these properties change
-        ///self.isDone.subscribe(saveChanges);
         self.description.subscribe(self.saveChanges);
+        self.date.subscribe(self.saveChanges);
+        self.currencyId.subscribe(self.saveChanges);
+        self.typeId.subscribe(self.saveChanges);
+        self.amount.subscribe(self.saveChanges);
 
         self.toJson = function () {
             var json = ko.toJSON(self, function(key,value) {

@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using Expenses.Data.Contracts;
 using Expenses.Web.Filters;
 using Expenses.Web.Models;
@@ -10,15 +16,15 @@ using System.Web.Http;
 
 namespace Expenses.Web.Controllers.Api
 {
-    [Authorize]
+    //[System.Web.Http.Authorize]
     public class ExpenseImageController : ApiControllerBase
     {
         public ExpenseImageController(IExpensesUow uow)
             : base(uow)
         {
-            
+
         }
-        
+
         public ExpenseDto GetExpenseImage(int id)
         {
             var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
@@ -39,40 +45,52 @@ namespace Expenses.Web.Controllers.Api
             };
         }
 
-        [ValidateHttpAntiForgeryToken]
-        public HttpResponseMessage PutExpenseImage(int id, ExpenseDto dto)
+
+        [System.Web.Http.HttpPost]
+        public async Task<HttpResponseMessage> UploadFile()
         {
-            if (!ModelState.IsValid)
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            if (id != dto.ExpenseId)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            var existingExpense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
-            if (existingExpense.ExpenseReport.Employee.UserId != User.Identity.Name){
-                // Trying to modify a record that does not belong to the user
-                return Request.CreateResponse(HttpStatusCode.Unauthorized);
-            }
-
-            // We only update images in this controller
-            existingExpense.Image = dto.Image;
+            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(root);
 
             try
             {
-                Uow.Expenses.Update(existingExpense);
-                Uow.Commit();
-            }
-            catch (Exception)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
-            }
+                var sb = new StringBuilder(); // Holds the response body
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+                // Read the form data and return an async task.
+                var r = await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the form data.
+                foreach (var key in provider.FormData.AllKeys)
+                {
+                    foreach (var val in provider.FormData.GetValues(key))
+                    {
+                        sb.Append(string.Format("{0}: {1}\n", key, val));
+                    }
+                }
+
+                // This illustrates how to get the file names for uploaded files.
+                foreach (var file in provider.FileData)
+                {
+                    FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                    sb.Append(string.Format("Uploaded file: {0} ({1} bytes)\n", fileInfo.Name, fileInfo.Length));
+                }
+                return new HttpResponseMessage()
+                {
+                    Content = new StringContent(sb.ToString())
+                };
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
-        
+
+
     }
 }

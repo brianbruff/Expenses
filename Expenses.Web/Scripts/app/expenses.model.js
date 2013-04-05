@@ -17,6 +17,9 @@
         self.currencyId = ko.observable(data.currencyId);
         self.typeId = ko.observable(data.typeId);
         self.image = ko.observable(data.image);
+        self.imageFile = ko.observable();
+        self.imageObjectURL = ko.observable();
+        self.imageBinary = ko.observable();
         self.amount = ko.observable(data.amount);
         self.exchangeRate = ko.observable(data.exchangeRate);
         
@@ -44,6 +47,11 @@
         self.currencyId.subscribe(self.saveChanges);
         self.typeId.subscribe(self.saveChanges);
         self.amount.subscribe(self.saveChanges);
+        self.imageFile.subscribe(function () {
+            // select the form and post it
+            //var form = $("form[id='imageForm']");
+            //form.submit();
+        });
 
         self.toJson = function () {
             var json = ko.toJSON(self, function(key,value) {

@@ -5,6 +5,42 @@ ko.bindingHandlers.validate = {
     }
 };
 
+var windowURL = window.URL || window.webkitURL;
+ko.bindingHandlers.file = {
+    init: function (element, valueAccessor) {
+        $(element).change(function () {
+            var file = this.files[0];
+            if (ko.isObservable(valueAccessor())) {
+                valueAccessor()(file);
+            }
+        });
+    },
+
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var file = ko.utils.unwrapObservable(valueAccessor());
+        var bindings = allBindingsAccessor();
+
+        if (bindings.fileObjectURL && ko.isObservable(bindings.fileObjectURL)) {
+            var oldUrl = bindings.fileObjectURL();
+            if (oldUrl) {
+                windowURL.revokeObjectURL(oldUrl);
+            }
+            bindings.fileObjectURL(file && windowURL.createObjectURL(file));
+        }
+
+        if (bindings.fileBinaryData && ko.isObservable(bindings.fileBinaryData)) {
+            if (!file) {
+                bindings.fileBinaryData(null);
+            } else {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    bindings.fileBinaryData(e.target.result);
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }
+    }
+};
 ko.bindingHandlers.img = {
     update: function (element, valueAccessor) {
         //grab the value of the parameters, making sure to unwrap anything that could be observable
@@ -22,11 +58,14 @@ ko.bindingHandlers.img = {
     },
     init: function (element, valueAccessor) {
         var $element = $(element);
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        var busy = ko.utils.unwrapObservable(value.busy);
+        
+        $element.attr("src", busy);
 
         //hook up error handling that will unwrap and set the fallback value
         $element.error(function () {
-            var value = ko.utils.unwrapObservable(valueAccessor()),
-                busy = ko.utils.unwrapObservable(value.busy);
+            
 
             $element.attr("src", busy);
         });

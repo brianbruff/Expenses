@@ -9,6 +9,7 @@ window.expensesApp.datacontext = (function () {
         createExpense: createExpense,
         createExpenseReport: createExpenseReport,
         saveNewExpense: saveNewExpense,
+        saveNewExpenseImage: saveNewExpenseImage,
         saveNewExpenseReport: saveNewExpenseReport,
         saveChangedExpense: saveChangedExpense,
         saveChangedExpenseReport: saveChangedExpenseReport,
@@ -119,6 +120,18 @@ window.expensesApp.datacontext = (function () {
                 expense.errorMessage("Error adding a new todo item.");
             });
     }
+    
+    function saveNewExpenseImage(expense) {
+        clearErrorMessage(expense);
+        return ajaxRequest("post", expenseUrl(), expense)
+            .done(function (result) {
+                expense.expenseId = result.expenseId;
+            })
+            .fail(function () {
+                expense.errorMessage("Error adding a new todo item.");
+            });
+    }
+    
     function saveNewExpenseReport(expenseReport) {
         clearErrorMessage(expenseReport);
         return ajaxRequest("post", expenseReportUrl(), expenseReport)

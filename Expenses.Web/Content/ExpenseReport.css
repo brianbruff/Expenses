@@ -83,6 +83,11 @@ input {
     height: 200px;
 }
 
+img.thumb {
+    max-width: 200px;
+    max-height: 200px;
+}
+
 #expenseDetails input {
     outline: none;
     border: none;

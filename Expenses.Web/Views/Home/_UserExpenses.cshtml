@@ -82,12 +82,12 @@
                     </div>
                     <div>
                         <img data-bind="img: { src: imageSrc, busy: '/Images/busy.gif', fallback: '/Images/question.gif' }, blurOnEnter: true" alt="Expense image" />
-
-                        <a href="#">
-                            <span class="uploadImageLink">
-                                <i>Upload Image</i>
-                            </span>
-                        </a>
+                        
+                       <form name="imageForm" id="imageForm" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
+                            <input type="file" accept="image/*" name="expenseImage" />
+                            <input type="submit" value="Upload" />
+                        </form>
+                        
                         <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
 
                     </div>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,11 +76,27 @@ namespace Expenses.Web.Controllers.Api
                     }
                 }
 
+                var expenseId = int.Parse(provider.FormData.GetValues("expenseId").First());
+
+
                 // This illustrates how to get the file names for uploaded files.
                 foreach (var file in provider.FileData)
                 {
                     FileInfo fileInfo = new FileInfo(file.LocalFileName);
-                    sb.Append(string.Format("Uploaded file: {0} ({1} bytes)\n", fileInfo.Name, fileInfo.Length));
+                    
+
+
+                    using (var ms = new MemoryStream())
+                    {
+                        var bm = new Bitmap(file.LocalFileName);
+                        bm.Save(ms, ImageFormat.Jpeg);
+
+
+                        var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(expenseId);
+                        expense.Image = ms.ToArray();
+                        Uow.Commit();
+                    }
+
                 }
                 return new HttpResponseMessage()
                 {

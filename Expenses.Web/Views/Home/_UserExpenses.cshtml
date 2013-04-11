@@ -84,7 +84,8 @@
                         <img data-bind="img: { src: imageSrc, busy: '/Images/busy.gif', fallback: '/Images/question.gif' }, blurOnEnter: true" alt="Expense image" />
                         
                        <form name="imageForm" id="imageForm" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
-                            <input type="file" accept="image/*" name="expenseImage" />
+                           <input type="file" accept="image/*" name="expenseImage" />
+                           <input type="hidden" name="expenseId" data-bind="value: expenseId" />
                             <input type="submit" value="Upload" />
                         </form>
                         

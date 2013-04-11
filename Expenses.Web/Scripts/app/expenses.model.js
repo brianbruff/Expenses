@@ -101,7 +101,7 @@
             $.each(self.expenses(), function (e) {
                  total += this.baseAmount();
             });
-            return total;
+            return total.toFixed(2);
         });
 
         self.deleteExpense = function () {

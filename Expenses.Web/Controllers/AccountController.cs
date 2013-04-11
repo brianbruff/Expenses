@@ -109,17 +109,17 @@ namespace Expenses.Web.Controllers
             uow.ExpenseReports.Add(report);
             uow.Commit();
 
-            byte[] defaultImazge = null;
+            byte[] image = null;
             using (var ms = new MemoryStream())
             {
                 Properties.Resources.defaultExpense.Save(ms, ImageFormat.Jpeg);
-                defaultImazge = ms.ToArray();
+                image = ms.ToArray();
             }
 
             // todo: remove this in production
             report.Expenses.Add(new Model.Expense
                                     {
-                                        Image = defaultImazge,
+                                        Image = image,
                                         Currency = euro, Date = DateTime.Now.Date,
                                         Description = "Taxi DGL => Buckingham", 
                                         Type = uow.ExpenseTypes.GetById(1),
@@ -127,7 +127,7 @@ namespace Expenses.Web.Controllers
                                     });
             report.Expenses.Add(new Model.Expense
             {
-                Image = defaultImazge,
+                Image = image,
                 Currency = euro,
                 Date = DateTime.Now.Date,
                 Description = "Lunch",

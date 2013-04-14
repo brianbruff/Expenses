@@ -14,19 +14,24 @@
     <div id="userSettings">
         @Html.Partial("_UserSettings")
     </div>
+    
+    <div class="container-fluid">
+        <div id="body">
+                @RenderBody()
+        </div>
 
-    <div id="body">
-        @RenderBody()
+        <footer>
+            <div id="footer">
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Expense Reports", "Index", "Home", new { area = "" }, null)</li>
+                    </ul>
+                </nav> 
+                <p>&copy; @DateTime.Now.Year - www.briankeating.net</p>
+            </div>
+        </footer>
+    
     </div>
-
-    <footer>
-        <nav>
-            <ul id="menu">
-                <li>@Html.ActionLink("Expense Reports", "Index", "Home", new { area = "" }, null)</li>
-            </ul>
-        </nav> 
-        <p>&copy; @DateTime.Now.Year - www.briankeating.net</p>
-    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")

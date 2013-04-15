@@ -13,16 +13,6 @@
 <div id="expensesWrap" class="row-fluid">
     <section>
         
-        @*<div id="expenseReportsList" class="span3" data-bind="visible: expenseReports().length > 0">
-            <table>
-                <tbody data-bind="foreach: expenseReports">
-                    <tr data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor: pointer">
-                        <td data-bind="text: name"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>*@
-        
         <div id="expenseReportsList" class="span3" data-bind="visible: expenseReports().length > 0">
             <ul data-bind="foreach: expenseReports">
                 <li data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor: pointer">
@@ -58,53 +48,71 @@
 
                     </tbody>
                 </table>
-                @*<form data-bind="submit: addExpense">
-                    <input class="addExpense" type="text" data-bind="value: selectedExpense.name, placeholder: 'Type here to add', blurOnEnter: true, event: { blur: addExpense }" />
-                </form>*@
-
                 <p>Grand Total: <span data-bind='text: baseTotal()'></span></p>
             </div>
+
         <div data-bind="with: selectedExpense">
             <div id="expenseDetails">
-                <a href="#" data-bind="click: $parent.done">Done</a>
+                <form name="imageForm" id="imageForm" class="form-horizontal" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
+                    
+                    <div class="control-group">
+                        <div class="controls">
+                            <a href="#" class="btn" data-bind="click: $parent.done">Done</a>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="expenseDate" class="control-label">Date:</label>
+                        <div class="controls">
+                            <input id="expenseDate" type="text" data-bind="datepicker: date, datepickerOptions: { dateFormat: 'DD, d MM, yy' }, blurOnEnter: true, event: { blur: $parent.addExpense }" />
+                        </div>
+                    </div>
 
+                    <div class="control-group">
+                        <label class="control-label">Description:</label>
+                        <div class="controls">
+                            <input type="text" data-bind="value: description, placeholder: 'Type Expense Name', blurOnEnter: true" />
+                        </div>
+                    </div>
 
-                <div>
-                    <label for="expenseDate">Date:</label>
-                    <input id="expenseDate" type="text" data-bind="datepicker: date, datepickerOptions: { dateFormat: 'DD, d MM, yy' }, blurOnEnter: true, event: { blur: $parent.addExpense }" />
-                </div>
+                    <div class="control-group">
+                        <label class="control-label">Currency</label>
+                        <div class="controls">
+                            <select data-bind="options: $root.currencies, optionsText: 'code', optionsValue: 'currencyId', value: currencyId"></select>
+                        </div>
+                    </div>
 
-                <div>
-                    <label>Description:</label>
-                    <input type="text" data-bind="value: description, placeholder: 'Type Expense Name', blurOnEnter: true" />
-                </div>
+                    <div class="control-group">
+                        <label class="control-label">Amount</label>
+                        <div class="controls">
+                            <input type="text" data-bind="value: amount, blurOnEnter: true" />
+                        </div>
+                    </div>
 
-                <div>
-                    <label>Currency</label>
-                    <select data-bind="options: $root.currencies, optionsText: 'code', optionsValue: 'currencyId', value: currencyId"></select>
-                </div>
-                <div>
-                    <label>Amount</label>
-                    <input type="text" data-bind="value: amount, blurOnEnter: true" />
-                </div>
+                    <div class="control-group">
+                        <label class="control-label">Type</label>
+                        <div class="controls">
+                            <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
+                        </div>
+                    </div>
 
-                <div>
-                    <label>Type</label>
-                    <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
+                    <div class="control-group">
+                        <div class="controls">
+                            <img class="img-rounded" data-bind="img: { src: imageSrc, busy: '/Images/busy.gif', fallback: '/Images/question.gif' }, blurOnEnter: true" alt="Expense image" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="file" accept="image/*" name="expenseImage" />
+                            <input type="hidden" name="expenseId" data-bind="value: expenseId" />
+                            <input type="submit" class="btn" value="Upload" />
+                        </div>
+                    </div>
+                    
+                    
 
-                </div>
-                <div>
-                    <img class="img-rounded" data-bind="img: { src: imageSrc, busy: '/Images/busy.gif', fallback: '/Images/question.gif' }, blurOnEnter: true" alt="Expense image" />
-                        
-                    <form name="imageForm" id="imageForm" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
-                        <input type="file" accept="image/*" name="expenseImage" />
-                        <input type="hidden" name="expenseId" data-bind="value: expenseId" />
-                        <input type="submit" value="Upload" />
-                    </form>
-                        
                     <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
-
-                </div>
+                </form>
             </div>
         </div>
             </div>

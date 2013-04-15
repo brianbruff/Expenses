@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Expenses</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
+    @*<meta name="viewport" content="width=device-width" />*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/themes/base/css")
@@ -15,7 +15,7 @@
         @Html.Partial("_UserSettings")
     </div>
     
-    <div class="container-fluid">
+    <div class="container">
         <div id="body">
                 @RenderBody()
         </div>
@@ -30,7 +30,6 @@
                 <p>&copy; @DateTime.Now.Year - www.briankeating.net</p>
             </div>
         </footer>
-    
     </div>
 
     @Scripts.Render("~/bundles/jquery")

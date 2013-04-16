@@ -28,15 +28,15 @@ ko.bindingHandlers.file = {
             bindings.fileObjectURL(file && windowURL.createObjectURL(file));
         }
 
-        if (bindings.fileBinaryData && ko.isObservable(bindings.fileBinaryData)) {
+        if (bindings.imageBase64 && ko.isObservable(bindings.imageBase64)) {
             if (!file) {
-                bindings.fileBinaryData(null);
+                bindings.imageBase64(null);
             } else {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    bindings.fileBinaryData(e.target.result);
+                    bindings.imageBase64(e.target.result);
                 };
-                reader.readAsArrayBuffer(file);
+                reader.readAsDataURL(file);
             }
         }
     }
@@ -72,22 +72,22 @@ ko.bindingHandlers.img = {
     },
 };
 
-ko.bindingHandlers.imgUpload = {
-    update: function (element, valueAccessor) {
-        //grab the value of the parameters, making sure to unwrap anything that could be observable
-        var value = ko.utils.unwrapObservable(valueAccessor()),
-            src = ko.utils.unwrapObservable(value.value);
+//ko.bindingHandlers.imgUpload = {
+//    update: function (element, valueAccessor) {
+//        //grab the value of the parameters, making sure to unwrap anything that could be observable
+//        var value = ko.utils.unwrapObservable(valueAccessor()),
+//            src = ko.utils.unwrapObservable(value.value);
             
 
             
-    },
-    init: function (element, valueAccessor) {
-        var $element = $(element);
-        var value = ko.utils.unwrapObservable(valueAccessor());
-        var busy = ko.utils.unwrapObservable(value.busy);
+//    },
+//    init: function (element, valueAccessor) {
+//        var $element = $(element);
+//        var value = ko.utils.unwrapObservable(valueAccessor());
+//        var busy = ko.utils.unwrapObservable(value.busy);
         
-    }
-};
+//    }
+//};
 
 
 // Controls whether or not the text in a textbox is selected based on a model property

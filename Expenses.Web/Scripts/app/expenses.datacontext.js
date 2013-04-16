@@ -9,7 +9,7 @@ window.expensesApp.datacontext = (function () {
         createExpense: createExpense,
         createExpenseReport: createExpenseReport,
         saveNewExpense: saveNewExpense,
-        saveNewExpenseImage: saveNewExpenseImage,
+        saveChangedExpenseImage: saveChangedExpenseImage,
         saveNewExpenseReport: saveNewExpenseReport,
         saveChangedExpense: saveChangedExpense,
         saveChangedExpenseReport: saveChangedExpenseReport,
@@ -121,7 +121,7 @@ window.expensesApp.datacontext = (function () {
             });
     }
     
-    function saveNewExpenseImage(expense) {
+    function saveChangedExpenseImage(expense) {
         clearErrorMessage(expense);
         return ajaxRequest("post", expenseUrl(), expense)
             .done(function (result) {

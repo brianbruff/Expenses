@@ -19,7 +19,8 @@
         self.image = ko.observable(data.image);
         self.imageFile = ko.observable();
         self.imagePath = ko.observable();
-        self.imageBinary = ko.observable();
+        self.imageBase64 = ko.observable();
+        self.imageObjectURL = ko.observable();
         self.amount = ko.observable(data.amount);
         self.exchangeRate = ko.observable(data.exchangeRate);
         
@@ -33,9 +34,9 @@
         self.displayDate = ko.computed(function () {
             return moment(self.date()).format("DD/MM/YYYY");
         });
-        self.imageSrc = ko.computed(function () {
-            return 'data:image/jpg;base64,' + self.image();
-        });
+        //self.imageSrc = ko.computed(function () {
+        //    return 'data:image/jpg;base64,' + self.image();
+        //});
 
         self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
@@ -47,10 +48,11 @@
         self.currencyId.subscribe(self.saveChanges);
         self.typeId.subscribe(self.saveChanges);
         self.amount.subscribe(self.saveChanges);
-        self.imageFile.subscribe(function () {
+        self.image.subscribe(function () {
             // select the form and post it
             //var form = $("form[id='imageForm']");
             //form.submit();
+            datacontext.saveChangedExpenseImage(self);
         });
 
         self.toJson = function () {

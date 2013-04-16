@@ -97,17 +97,19 @@
                     </div>
 
                     <div class="control-group">
-                        <div class="controls">
-                            <img class="img-rounded" data-bind="img: { src: imageSrc, busy: '/Images/busy.gif', fallback: '/Images/question.gif' }, blurOnEnter: true" alt="Expense image" />
+                        <div class="controls" data-bind="if: image">
+                            <img class="img-rounded" data-bind="attr: { src: image }" alt="Expense image" />
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <input type="file" accept="image/*" name="expenseImage" data-bind="imgUpload: { value: imagePath }, value: imagePath" />
-                            <input type="hidden" name="expenseId" data-bind="value: expenseId" />
-                            <input type="submit" id="uploadButton" class="btn btn-success" value="Upload" />
+                            <input type="file" accept="image/*" name="expenseImage" data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image" />
                         </div>
                     </div>
+                    
+                                    
+                
+
                     
                     
 

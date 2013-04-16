@@ -47,67 +47,102 @@ namespace Expenses.Web.Controllers.Api
             };
         }
 
-
-        [System.Web.Http.HttpPost]
-        public async Task<HttpResponseMessage> UploadFile()
+        public HttpResponseMessage PutExpense(int id, ExpenseDto dto)
         {
-            // Check if the request contains multipart/form-data.
-            if (!Request.Content.IsMimeMultipartContent())
+            if (!ModelState.IsValid)
             {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new MultipartFormDataStreamProvider(root);
+            if (id != dto.ExpenseId)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            var existingExpense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
+            if (existingExpense.ExpenseReport.Employee.UserId != User.Identity.Name)
+            {
+                // Trying to modify a record that does not belong to the user
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+
+            // We only update images in this controller
+            existingExpense.Image = dto.Image;
 
             try
             {
-                var sb = new StringBuilder(); // Holds the response body
+                Uow.Expenses.Update(existingExpense);
+                Uow.Commit();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
 
-                // Read the form data and return an async task.
-                var r = await Request.Content.ReadAsMultipartAsync(provider);
-
-                // This illustrates how to get the form data.
-                foreach (var key in provider.FormData.AllKeys)
-                {
-                    foreach (var val in provider.FormData.GetValues(key))
-                    {
-                        sb.Append(string.Format("{0}: {1}\n", key, val));
-                    }
-                }
-
-                var expenseId = int.Parse(provider.FormData.GetValues("expenseId").First());
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
 
 
-                // This illustrates how to get the file names for uploaded files.
-                foreach (var file in provider.FileData)
-                {
-                    FileInfo fileInfo = new FileInfo(file.LocalFileName);
+        //[System.Web.Http.HttpPost]
+        //public async Task<HttpResponseMessage> UploadFile()
+        //{
+        //    // Check if the request contains multipart/form-data.
+        //    if (!Request.Content.IsMimeMultipartContent())
+        //    {
+        //        throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+        //    }
+
+        //    string root = HttpContext.Current.Server.MapPath("~/App_Data");
+        //    var provider = new MultipartFormDataStreamProvider(root);
+
+        //    try
+        //    {
+        //        var sb = new StringBuilder(); // Holds the response body
+
+        //        // Read the form data and return an async task.
+        //        var r = await Request.Content.ReadAsMultipartAsync(provider);
+
+        //        // This illustrates how to get the form data.
+        //        foreach (var key in provider.FormData.AllKeys)
+        //        {
+        //            foreach (var val in provider.FormData.GetValues(key))
+        //            {
+        //                sb.Append(string.Format("{0}: {1}\n", key, val));
+        //            }
+        //        }
+
+        //        var expenseId = int.Parse(provider.FormData.GetValues("expenseId").First());
+
+
+        //        // This illustrates how to get the file names for uploaded files.
+        //        foreach (var file in provider.FileData)
+        //        {
+        //            FileInfo fileInfo = new FileInfo(file.LocalFileName);
                     
 
 
-                    using (var ms = new MemoryStream())
-                    {
-                        var bm = new Bitmap(file.LocalFileName);
-                        bm.Save(ms, ImageFormat.Jpeg);
+        //            using (var ms = new MemoryStream())
+        //            {
+        //                var bm = new Bitmap(file.LocalFileName);
+        //                bm.Save(ms, ImageFormat.Jpeg);
 
 
-                        var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(expenseId);
-                        expense.Image = ms.ToArray();
-                        Uow.Commit();
-                    }
+        //                var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(expenseId);
+        //                expense.Image = ms.ToArray();
+        //                Uow.Commit();
+        //            }
 
-                }
-                return new HttpResponseMessage()
-                {
-                    Content = new StringContent(sb.ToString())
-                };
-            }
-            catch (System.Exception e)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
-            }
-        }
+        //        }
+        //        return new HttpResponseMessage()
+        //        {
+        //            Content = new StringContent(sb.ToString())
+        //        };
+        //    }
+        //    catch (System.Exception e)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+        //    }
+        //}
 
 
     }

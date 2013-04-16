@@ -19,15 +19,7 @@ ko.bindingHandlers.file = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var file = ko.utils.unwrapObservable(valueAccessor());
         var bindings = allBindingsAccessor();
-
-        if (bindings.fileObjectURL && ko.isObservable(bindings.fileObjectURL)) {
-            var oldUrl = bindings.fileObjectURL();
-            if (oldUrl) {
-                windowURL.revokeObjectURL(oldUrl);
-            }
-            bindings.fileObjectURL(file && windowURL.createObjectURL(file));
-        }
-
+        
         if (bindings.imageBase64 && ko.isObservable(bindings.imageBase64)) {
             if (!file) {
                 bindings.imageBase64(null);
@@ -35,6 +27,15 @@ ko.bindingHandlers.file = {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     bindings.imageBase64(e.target.result);
+                    
+                    //Now update fileObjet, we do this last thing as implementation detail, it triggers post
+                    if (bindings.fileObjectURL && ko.isObservable(bindings.fileObjectURL)) {
+                        var oldUrl = bindings.fileObjectURL();
+                        if (oldUrl) {
+                            windowURL.revokeObjectURL(oldUrl);
+                        }
+                        bindings.fileObjectURL(file && windowURL.createObjectURL(file));
+                    }
                 };
                 reader.readAsDataURL(file);
             }

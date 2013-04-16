@@ -19,7 +19,7 @@
         self.image = ko.observable(data.image);
         self.imageFile = ko.observable();
         self.imagePath = ko.observable();
-        self.imageBase64 = ko.observable();
+        //self.imageBase64 = ko.observable();
         self.imageObjectURL = ko.observable();
         self.amount = ko.observable(data.amount);
         self.exchangeRate = ko.observable(data.exchangeRate);
@@ -34,10 +34,7 @@
         self.displayDate = ko.computed(function () {
             return moment(self.date()).format("DD/MM/YYYY");
         });
-        //self.imageSrc = ko.computed(function () {
-        //    return 'data:image/jpg;base64,' + self.image();
-        //});
-
+        
         self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
         };
@@ -48,11 +45,8 @@
         self.currencyId.subscribe(self.saveChanges);
         self.typeId.subscribe(self.saveChanges);
         self.amount.subscribe(self.saveChanges);
-        self.image.subscribe(function () {
-            // select the form and post it
-            //var form = $("form[id='imageForm']");
-            //form.submit();
-            datacontext.saveChangedExpenseImage(self);
+        self.imageObjectURL.subscribe(function () {
+            datacontext.saveChangedExpenseImage(new expenseImageDto(self.expenseId, self.image(), self.errorMessage));
         });
 
         self.toJson = function () {
@@ -66,6 +60,21 @@
             return json;
         };
     };
+    
+    function expenseImageDto(expenseId, expenseImage, errorMessage) {
+        var self = this;
+        
+        self.expenseId = expenseId;
+        self.image = expenseImage;
+        self.imageParts = expenseImage.split(";base64,");
+        self.image = self.imageParts[1];
+        self.errorMessage = errorMessage;
+        
+        self.toJson = function () {
+            var json = ko.toJSON(self);
+            return json;
+        };
+    }
 
     function expenseReport(data) {
         var self = this;

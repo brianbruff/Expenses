@@ -123,12 +123,17 @@ window.expensesApp.datacontext = (function () {
     
     function saveChangedExpenseImage(expense) {
         clearErrorMessage(expense);
-        return ajaxRequest("post", expenseUrl(), expense)
+        return ajaxRequest("put", expenseImageUrl(expense.expenseId), expense)
             .done(function (result) {
                 expense.expenseId = result.expenseId;
             })
-            .fail(function () {
-                expense.errorMessage("Error adding a new todo item.");
+            .fail(function (e) {
+                var msg = {};
+                if (e.responseText && e.responseText.length > 0) {
+                    var message = JSON.parse(e.responseText);
+                    msg = message.message || {};
+                }
+                expense.errorMessage("Error adding a new expense item:" + msg);
             });
     }
     

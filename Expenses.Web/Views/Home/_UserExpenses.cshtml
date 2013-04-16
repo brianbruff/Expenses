@@ -57,7 +57,7 @@
                     
                     <div class="control-group">
                         <div class="controls">
-                            <a href="#" class="btn" data-bind="click: $parent.done">Done</a>
+                            <a href="#" class="btn btn-primary" data-bind="click: $parent.done">Done</a>
                         </div>
                     </div>
                     
@@ -103,9 +103,9 @@
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <input type="file" accept="image/*" name="expenseImage" />
+                            <input type="file" accept="image/*" name="expenseImage" data-bind="imgUpload: { value: imagePath }, value: imagePath" />
                             <input type="hidden" name="expenseId" data-bind="value: expenseId" />
-                            <input type="submit" class="btn" value="Upload" />
+                            <input type="submit" id="uploadButton" class="btn btn-success" value="Upload" />
                         </div>
                     </div>
                     

@@ -18,7 +18,7 @@
         self.typeId = ko.observable(data.typeId);
         self.image = ko.observable(data.image);
         self.imageFile = ko.observable();
-        self.imageObjectURL = ko.observable();
+        self.imagePath = ko.observable();
         self.imageBinary = ko.observable();
         self.amount = ko.observable(data.amount);
         self.exchangeRate = ko.observable(data.exchangeRate);

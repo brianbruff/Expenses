@@ -115,11 +115,13 @@ namespace Expenses.Web.Controllers
                 Properties.Resources.defaultExpense.Save(ms, ImageFormat.Jpeg);
                 image = ms.ToArray();
             }
+            var imageType = "data:image/jpeg";
 
             // todo: remove this in production
             report.Expenses.Add(new Model.Expense
                                     {
                                         Image = image,
+                                        ImageType = imageType,
                                         Currency = euro, Date = DateTime.Now.Date,
                                         Description = "Taxi DGL => Buckingham", 
                                         Type = uow.ExpenseTypes.GetById(1),
@@ -128,6 +130,7 @@ namespace Expenses.Web.Controllers
             report.Expenses.Add(new Model.Expense
             {
                 Image = image,
+                ImageType = imageType,
                 Currency = euro,
                 Date = DateTime.Now.Date,
                 Description = "Lunch",

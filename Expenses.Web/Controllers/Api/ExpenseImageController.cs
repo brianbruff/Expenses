@@ -43,11 +43,12 @@ namespace Expenses.Web.Controllers.Api
 
             return new ExpenseDto
             {
-                Image = expense.Image
+                Image = expense.Image,
+                ImageType = expense.ImageType
             };
         }
 
-        public HttpResponseMessage PutExpense(int id, ExpenseDto dto)
+        public HttpResponseMessage PutExpenseImage(int id, ExpenseDto dto)
         {
             if (!ModelState.IsValid)
             {
@@ -68,6 +69,7 @@ namespace Expenses.Web.Controllers.Api
 
             // We only update images in this controller
             existingExpense.Image = dto.Image;
+            existingExpense.ImageType = dto.ImageType;
 
             try
             {

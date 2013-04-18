@@ -1,3 +1,10 @@
 ul {
     list-style-type: none;
 }
+
+
+.thumb {
+    width: auto\9;
+    height: auto;
+    max-width: 70%;
+}

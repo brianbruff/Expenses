@@ -23,10 +23,16 @@ ko.bindingHandlers.file = {
         if (bindings.imageBase64 && ko.isObservable(bindings.imageBase64)) {
             if (!file) {
                 bindings.imageBase64(null);
+                bindings.imageType(null);
             } else {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    bindings.imageBase64(e.target.result);
+                    e.target.result = e.target.result || {};
+                    var result = e.target.result.split(",");
+                    if (result.length > 1) {
+                        bindings.imageBase64(result[1]);
+                        bindings.imageType(result[0]);
+                    }
                     
                     //Now update fileObjet, we do this last thing as implementation detail, it triggers post
                     if (bindings.fileObjectURL && ko.isObservable(bindings.fileObjectURL)) {

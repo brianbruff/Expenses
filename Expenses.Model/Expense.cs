@@ -17,6 +17,7 @@ namespace Expenses.Model
 
         public string Description { get; set; }
 
+        public string ImageType { get; set; }
         virtual public byte[] Image { get; set; }
 
         public int CurrencyId { get; set; }

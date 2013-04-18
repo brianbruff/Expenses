@@ -17,9 +17,9 @@
         self.currencyId = ko.observable(data.currencyId);
         self.typeId = ko.observable(data.typeId);
         self.image = ko.observable(data.image);
+        self.imageType = ko.observable(data.imageType);
         self.imageFile = ko.observable();
         self.imagePath = ko.observable();
-        //self.imageBase64 = ko.observable();
         self.imageObjectURL = ko.observable();
         self.amount = ko.observable(data.amount);
         self.exchangeRate = ko.observable(data.exchangeRate);
@@ -28,6 +28,9 @@
             return self.amount() * self.exchangeRate();
         });
         
+        self.imageSrc = ko.computed(function () {
+            return self.imageType() + "," + self.image();
+        });
 
         // Non-persisted properties
         self.errorMessage = ko.observable();
@@ -38,6 +41,10 @@
         self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
         };
+        
+        self.deleteExpense = function () {
+            return datacontext.deleteExpense(self);
+        };
 
         // Auto-save when these properties change
         self.description.subscribe(self.saveChanges);
@@ -46,7 +53,7 @@
         self.typeId.subscribe(self.saveChanges);
         self.amount.subscribe(self.saveChanges);
         self.imageObjectURL.subscribe(function () {
-            datacontext.saveChangedExpenseImage(new expenseImageDto(self.expenseId, self.image(), self.errorMessage));
+            datacontext.saveChangedExpenseImage(new expenseImageDto(self.expenseId, self.image(), self.imageType(), self.errorMessage));
         });
 
         self.toJson = function () {
@@ -61,13 +68,14 @@
         };
     };
     
-    function expenseImageDto(expenseId, expenseImage, errorMessage) {
+    function expenseImageDto(expenseId, expenseImage, expenseImageType, errorMessage) {
         var self = this;
         
         self.expenseId = expenseId;
         self.image = expenseImage;
-        self.imageParts = expenseImage.split(";base64,");
-        self.image = self.imageParts[1];
+        // self.imageParts = expenseImage.split(";base64,");
+        self.image = expenseImage;
+        self.imageType = expenseImageType;
         self.errorMessage = errorMessage;
         
         self.toJson = function () {
@@ -92,6 +100,13 @@
             self.reportVisible(false);
             datacontext.getExpenseImage(expense, self.selectedExpense, self.errorMessage);
         };
+        
+        self.isSubmitted = ko.computed(function () {
+            return self.date() != null;
+        });
+        
+            
+        
         
         self.done = function () {
             self.reportVisible(true);

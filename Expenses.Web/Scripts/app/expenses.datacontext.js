@@ -89,6 +89,7 @@ window.expensesApp.datacontext = (function () {
 
         function getSucceeded(data) {
             expenseObservable().image(data.image);
+            expenseObservable().imageType(data.imageType);
         }
 
         function getFailed() {
@@ -117,7 +118,7 @@ window.expensesApp.datacontext = (function () {
                 expense.expenseId = result.expenseId;
             })
             .fail(function () {
-                expense.errorMessage("Error adding a new todo item.");
+                expense.errorMessage("Error adding a new expense item.");
             });
     }
     
@@ -128,6 +129,8 @@ window.expensesApp.datacontext = (function () {
                 expense.expenseId = result.expenseId;
             })
             .fail(function (e) {
+                if (e.status == 200)
+                    return; // todo not sure why jQuery is giving an error
                 var msg = {};
                 if (e.responseText && e.responseText.length > 0) {
                     var message = JSON.parse(e.responseText);
@@ -150,8 +153,8 @@ window.expensesApp.datacontext = (function () {
     }
     function deleteExpense(expense) {
         return ajaxRequest("delete", expenseUrl(expense.expenseId))
-            .fail(function () {
-                expense.errorMessage("Error removing todo item.");
+            .fail(function (e) {
+                expense.errorMessage("Error removing expense item.");
             });
     }
     function deleteExpenseReport(expenseReport) {

@@ -36,6 +36,7 @@
                             <th>Description</th>
                             <th>Type</th>
                             <th>Amount</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: expenses()">
@@ -44,6 +45,7 @@
                             <td data-bind="text: description"></td>
                             <td data-bind="text: typeId"></td>
                             <td data-bind="text: baseAmount"></td>
+                            <td><a href="#" class="btn btn-danger" data-bind="click: deleteExpense">Remove</a></td>
                         </tr>
 
                     </tbody>
@@ -57,7 +59,8 @@
                     
                     <div class="control-group">
                         <div class="controls">
-                            <a href="#" class="btn btn-primary" data-bind="click: $parent.done">Done</a>
+                            <a href="#" class="btn btn-primary" data-bind="click: $parent.done">Back</a>
+                            <a href="#" class="btn btn-danger" data-bind="click: deleteExpense">Remove</a>
                         </div>
                     </div>
                     
@@ -98,12 +101,12 @@
 
                     <div class="control-group">
                         <div class="controls" data-bind="if: image">
-                            <img class="img-rounded" data-bind="attr: { src: image }" alt="Expense image" />
+                            <img class="img-rounded  thumb" data-bind="attr: { src: imageSrc }" alt="Expense image" />
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <input type="file" accept="image/*" name="expenseImage" data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image" />
+                            <input type="file" accept="image/*" name="expenseImage" title="Change Image" data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image, imageType: imageType" />
                         </div>
                     </div>
                     

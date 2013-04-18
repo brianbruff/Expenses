@@ -17,6 +17,8 @@ namespace Expenses.Web.Models
 
         public int TypeId { get; set; }
 
+        public string ImageType { get; set; }
+
         public byte[] Image { get; set; }
 
         public double Amount { get; set; }

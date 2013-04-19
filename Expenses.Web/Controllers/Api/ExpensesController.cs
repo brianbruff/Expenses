@@ -54,6 +54,33 @@ namespace Expenses.Web.Controllers.Api
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+        public HttpResponseMessage DeleteExpense(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            
+            var existingExpense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
+            if (existingExpense.ExpenseReport.Employee.UserId != User.Identity.Name)
+            {
+                // Trying to modify a record that does not belong to the user
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+            
+            try
+            {
+                Uow.Expenses.Delete(id);
+                Uow.Commit();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
         
     }
 }

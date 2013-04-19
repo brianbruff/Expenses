@@ -153,8 +153,14 @@ window.expensesApp.datacontext = (function () {
     }
     function deleteExpense(expense) {
         return ajaxRequest("delete", expenseUrl(expense.expenseId))
-            .fail(function (e) {
-                expense.errorMessage("Error removing expense item.");
+        .success(function () {
+            //todo: need to delete the expense client side
+            
+        })
+        .fail(function (e) {
+                if (e.status !== 200) {
+                    expense.errorMessage("Error removing expense item.");
+                }
             });
     }
     function deleteExpenseReport(expenseReport) {

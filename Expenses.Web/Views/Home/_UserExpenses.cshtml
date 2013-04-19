@@ -17,9 +17,10 @@
             <ul data-bind="foreach: expenseReports">
                 <li data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor: pointer">
                     <i class="icon-folder-open">
-                        
                     </i>
                     <span data-bind="text: name"></span>
+                    <i class="icon-"
+
                 </li>
             </ul>
         </div>
@@ -51,64 +52,66 @@
                     </tbody>
                 </table>
                 <p>Grand Total: <span data-bind='text: baseTotal()'></span></p>
+                
+                 
             </div>
 
-        <div data-bind="with: selectedExpense">
-            <div id="expenseDetails">
-                <form name="imageForm" id="imageForm" class="form-horizontal" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
+            <div data-bind="with: selectedExpense">
+                <div id="expenseDetails">
+                    <form name="imageForm" id="imageForm" class="form-horizontal" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
                     
-                    <div class="control-group">
-                        <div class="controls">
-                            <a href="#" class="btn btn-primary" data-bind="click: $parent.done">Back</a>
-                            <a href="#" class="btn btn-danger" data-bind="click: deleteExpense">Remove</a>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a href="#" class="btn btn-primary" data-bind="click: $parent.done">Back</a>
+                                <a href="#" class="btn btn-danger" data-bind="click: deleteExpense">Remove</a>
+                            </div>
                         </div>
-                    </div>
                     
-                    <div class="control-group">
-                        <label for="expenseDate" class="control-label">Date:</label>
-                        <div class="controls">
-                            <input id="expenseDate" type="text" data-bind="datepicker: date, datepickerOptions: { dateFormat: 'DD, d MM, yy' }, blurOnEnter: true, event: { blur: $parent.addExpense }" />
+                        <div class="control-group">
+                            <label for="expenseDate" class="control-label">Date:</label>
+                            <div class="controls">
+                                <input id="expenseDate" type="text" data-bind="datepicker: date, datepickerOptions: { dateFormat: 'DD, d MM, yy' }, blurOnEnter: true, event: { blur: $parent.addExpense }" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Description:</label>
-                        <div class="controls">
-                            <input type="text" data-bind="value: description, placeholder: 'Type Expense Name', blurOnEnter: true" />
+                        <div class="control-group">
+                            <label class="control-label">Description:</label>
+                            <div class="controls">
+                                <input type="text" data-bind="value: description, placeholder: 'Type Expense Name', blurOnEnter: true" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Currency</label>
-                        <div class="controls">
-                            <select data-bind="options: $root.currencies, optionsText: 'code', optionsValue: 'currencyId', value: currencyId"></select>
+                        <div class="control-group">
+                            <label class="control-label">Currency</label>
+                            <div class="controls">
+                                <select data-bind="options: $root.currencies, optionsText: 'code', optionsValue: 'currencyId', value: currencyId"></select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Amount</label>
-                        <div class="controls">
-                            <input type="text" data-bind="value: amount, blurOnEnter: true" />
+                        <div class="control-group">
+                            <label class="control-label">Amount</label>
+                            <div class="controls">
+                                <input type="text" data-bind="value: amount, blurOnEnter: true" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Type</label>
-                        <div class="controls">
-                            <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
+                        <div class="control-group">
+                            <label class="control-label">Type</label>
+                            <div class="controls">
+                                <select data-bind="options: $root.expenseTypes, optionsText: 'code', optionsValue: 'expenseTypeId', value: typeId"></select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <div class="controls" data-bind="if: image">
-                            <img class="img-rounded  thumb" data-bind="attr: { src: imageSrc }" alt="Expense image" />
+                        <div class="control-group">
+                            <div class="controls" data-bind="if: image">
+                                <img class="img-rounded  thumb" data-bind="attr: { src: imageSrc }" alt="Expense image" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <input type="file" accept="image/*" name="expenseImage" title="Change Image" data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image, imageType: imageType" />
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="file" accept="image/*" name="expenseImage" title="Change Image" data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image, imageType: imageType" />
+                            </div>
                         </div>
-                    </div>
                     
                                     
                 
@@ -116,10 +119,12 @@
                     
                     
 
-                    <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
-                </form>
+                        <p class="error" data-bind="visible: errorMessage, text: errorMessage"></p>
+                    </form>
+                </div>
             </div>
         </div>
-            </div>
-</section>
-    </div>
+    </section>
+   
+</div>
+

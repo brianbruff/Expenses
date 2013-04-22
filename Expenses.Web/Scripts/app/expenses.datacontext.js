@@ -68,7 +68,7 @@ window.expensesApp.datacontext = (function () {
         }
     }
     function getExpenseReport(expenseReportId, expenseReportObservable, errorObservable) {
-        return ajaxRequest("get", expenseReportUrl() + "/" + expenseReportId)
+        return ajaxRequest("get", expenseReportUrl() + expenseReportId)
             .done(getSucceeded)
             .fail(getFailed);
 
@@ -77,7 +77,7 @@ window.expensesApp.datacontext = (function () {
         }
 
         function getFailed() {
-            errorObservable("Error retrieving expense reports.");
+            errorObservable("Error retrieving expense report.");
         }
     }
     function getExpenseImage(expenseObj, expenseObservable, errorObservable) {

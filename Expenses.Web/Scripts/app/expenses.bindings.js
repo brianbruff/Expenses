@@ -27,11 +27,11 @@ ko.bindingHandlers.file = {
             } else {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    e.target.result = e.target.result || {};
-                    var result = e.target.result.split(",");
-                    if (result.length > 1) {
-                        bindings.imageBase64(result[1]);
-                        bindings.imageType(result[0]);
+                    var result = e.target.result || {};
+                    var resultParts = result.split(",");
+                    if (resultParts.length ===2) {
+                        bindings.imageBase64(resultParts[1]);
+                        bindings.imageType(resultParts[0]);
                     }
                     
                     //Now update fileObjet, we do this last thing as implementation detail, it triggers post

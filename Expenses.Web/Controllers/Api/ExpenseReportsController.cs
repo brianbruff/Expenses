@@ -39,7 +39,7 @@ namespace Expenses.Web.Controllers.Api
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            if (expenseReport.Employee.UserId != User.Identity.Name)
+            if (expenseReport.Employee.UserId.ToLower() != User.Identity.Name.ToLower())
             {
                 // Trying to modify a record that does not belong to the user
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));

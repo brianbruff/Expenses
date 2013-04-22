@@ -35,6 +35,8 @@
         // Non-persisted properties
         self.errorMessage = ko.observable();
         self.displayDate = ko.computed(function () {
+            if (!self.date())
+                self.date(new Date());
             return moment(self.date()).format("DD/MM/YYYY");
         });
         

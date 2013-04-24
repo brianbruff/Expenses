@@ -1,27 +1,9 @@
-﻿body, input, button {
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    font-size: 1.2em;
-}
-
-body {
-    background-color: #fff;
-    color: #333;
-    max-width: 980px; /*Remove this to make it full screen*/
-    margin: 1em auto;
-}
-
+﻿
 button, input[type=submit] {
     border: 1px solid #dedede;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-}
-
-.content-wrapper {
-    margin: 0 auto;
-    max-width: 960px;
-    padding-right: 10px;
-    padding-left: 10px;
 }
 
 /*#region Header */
@@ -186,11 +168,6 @@ ol.round {
 
 /*#endregion */
 
-#main-content {
-    min-height: 400px;
-    text-align: left;
-    float: left;
-}
 
 /*#region info and errors */
 .error {
@@ -245,14 +222,14 @@ ol.round {
 
 /*#region Footer */
 
-footer {
+/*footer {
     clear: both;
     margin: 5em 5em .7em 0;
-}
+}*/
 
 /*#endregion */
 
-@media only screen and (max-width: 600px) {
+/*@media only screen and (max-width: 600px) {
 
     body {
         margin: .2em 0;
@@ -262,4 +239,4 @@ footer {
         text-align: center;
         clear: both;
     }
-}
+}*/

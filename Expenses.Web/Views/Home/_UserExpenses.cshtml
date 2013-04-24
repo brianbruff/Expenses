@@ -7,19 +7,18 @@
     }
 }
 
-<p class="error" data-bind="text: error"></p>
+
 <input id="antiForgeryToken" type="hidden" value="@GetAntiForgeryToken()" />
 
 <div id="expensesWrap" class="row-fluid">
+    <p class="error" data-bind="text: error"></p>
     <section>
-        
         <div id="expenseReportsList" class="span3" data-bind="visible: expenseReports().length > 0">
             <ul data-bind="foreach: expenseReports">
                 <li data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor: pointer">
                     <i class="icon-folder-open">
                     </i>
                     <span data-bind="text: name"></span>
-                    @*<i class="icon-"*@
 
                 </li>
             </ul>
@@ -110,7 +109,7 @@
                         <div class="control-group">
                             <div class="controls">
                                 <input type="file" accept="image/*" name="expenseImage" title="Change Image" 
-                                    data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image, imageType: imageType" />
+                                       data-bind="file: imageFile, fileObjectURL: imageObjectURL, imageBase64: image, imageType: imageType" />
                             </div>
                         </div>
                     
@@ -126,6 +125,5 @@
             </div>
         </div>
     </section>
-   
 </div>
 

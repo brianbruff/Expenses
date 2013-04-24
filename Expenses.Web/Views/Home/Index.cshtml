@@ -10,7 +10,7 @@
 
 
 
-<div id="main-content-old">
+
 
     @if (@User.Identity.IsAuthenticated)
     {
@@ -18,7 +18,7 @@
     }
     else
     {
-        <div class="ExpenseReport" id="loginPanel">
+        <div id="loginPanel">
             <section id="localLoginPanel">
                 <h2>Log in</h2>
                 @Html.Partial("_Login")
@@ -29,13 +29,13 @@
             </section>
             <p>First time here? <a id="showRegister">Sign up</a></p>
         </div>
-        <div class="ExpenseReport" id="registerPanel">
+        <div id="registerPanel">
             <h2>Sign up</h2>
             @Html.Partial("_Register")
             <p>Already signed up? <a id="showLogin">Log in</a></p>
         </div>
     }
- </div>
+
 
 @if (@User.Identity.IsAuthenticated)
 {

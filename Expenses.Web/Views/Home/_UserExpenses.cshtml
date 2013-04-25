@@ -29,7 +29,11 @@
     <section>
         <div id="expensesList" class="span9" data-bind="with: selectedReport">
             <div data-bind="fadeSwitcher: reportVisible">
-                <table id="expensesTable" class="table table-striped">
+                <div id="reportMenu">
+                    <a class="icon-plus" href="#" title="New Expense" data-bind="click: newExpense"></a>
+                    <a class="icon-share-alt" href="#" title="Submit" ></a>
+                </div>
+                <table id="expensesTable" class="table table-hover">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -49,20 +53,29 @@
                         </tr>
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Grand Total:</th>
+                            <th></th>
+                            <th><span data-bind='text: baseTotal()'></span></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+
                 </table>
-                <p>Grand Total: <span data-bind='text: baseTotal()'></span></p>
+                
                 
                  
             </div>
 
-            <div data-bind="with: selectedExpense">
+            <div data-bind="with: selectedExpense, visible: selectedExpense()">
                 <div id="expenseDetails">
                     <form name="imageForm" id="imageForm" class="form-horizontal" method="post" enctype="multipart/form-data" action="api/ExpenseImage">
                     
                         <div class="control-group">
                             <div class="controls">
                                 <a href="#" class="btn btn-primary" data-bind="click: $parent.done">Back</a>
-                                @*<a href="#" class="btn btn-danger" data-bind="click: deleteExpense">Remove</a>*@
                             </div>
                         </div>
                     

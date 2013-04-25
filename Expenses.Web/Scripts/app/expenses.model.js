@@ -152,8 +152,24 @@
                 function (expenseData) {
                     return datacontext.createExpense(expenseData);
                 });
-    }
-    expenseReport.prototype.addExpense = function () {
+    };
+    
+    
+    expenseReport.prototype.newExpense = function () {
+        var self = this;
+            var expense = datacontext.createExpense(
+                {
+                    description: "_newExpense",
+                    date: new Date(),
+                    currencyId: expensesApp.ExpenseReportViewModel.currencies()[0].currencyId,
+                    typeId: expensesApp.ExpenseReportViewModel.expenseTypes()[0].typeId,
+                    expenseReportId: self.expenseReportId
+                });
+            self.expenses.push(expense);
+            datacontext.saveNewExpense(expense);
+    };
+    
+    expenseReport.prototype.submit = function () {
         //var self = this;
         //if (self.newTodoTitle()) { // need a title to save
         //    var expense = datacontext.createExpense(

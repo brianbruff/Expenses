@@ -115,7 +115,7 @@ namespace Expenses.Web.Controllers.Api
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, id);
         }
         
     }

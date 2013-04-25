@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using System;
+using System.Data.Entity.Infrastructure;
 using Expenses.Data.Contracts;
 using Expenses.Web.Filters;
 using Expenses.Web.Models;
@@ -51,6 +52,41 @@ namespace Expenses.Web.Controllers.Api
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        public HttpResponseMessage PostExpense(ExpenseDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            var existingExpenseReport = Uow.ExpenseReports.Include(e => e.Employee).GetById(dto.ExpenseReportId);
+            if (existingExpenseReport.Employee.UserId != User.Identity.Name)
+            {
+                // Trying to modify a record that does not belong to the user
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+
+            var expense = new Model.Expense { ExpenseReport = existingExpenseReport };
+            dto.UpdateEntity(expense);
+
+            try
+            {
+                Uow.Expenses.Add(expense);
+                Uow.Commit();
+                dto.ExpenseId = expense.Id;
+            }
+            catch (Exception exp)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
+            var response = Request.CreateResponse(HttpStatusCode.Created, dto);
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = dto.ExpenseId }));
+            return response;
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }

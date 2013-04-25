@@ -162,8 +162,11 @@
                     description: "_newExpense",
                     date: new Date(),
                     currencyId: expensesApp.ExpenseReportViewModel.currencies()[0].currencyId,
-                    typeId: expensesApp.ExpenseReportViewModel.expenseTypes()[0].typeId,
-                    expenseReportId: self.expenseReportId
+                    typeId: expensesApp.ExpenseReportViewModel.expenseTypes()[0].expenseTypeId,
+                    expenseReportId: self.expenseReportId,
+                    exchangeRate: 1,
+                    amount: 0,
+                    
                 });
             self.expenses.push(expense);
             datacontext.saveNewExpense(expense);

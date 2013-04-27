@@ -135,7 +135,7 @@
         self.deleteExpense = function () {
             var expense = this;
             return datacontext.deleteExpense(expense)
-                 .done(function () { self.todos.remove(expense); });
+                 .done(function () { self.expenses.remove(expense); });
         };
 
         // Auto-save when these properties change

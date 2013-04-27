@@ -187,6 +187,17 @@ ko.bindingHandlers.fadeSwitcher = {
 };
 
 
+//ko.bindingHandlers.stopBubble = {
+//    init: function (element) {
+//        ko.utils.registerEventHandler(element, "click", function (event) {
+//            event.cancelBubble = true;
+//            if (event.stopPropagation) {
+//                event.stopPropagation();
+//            }
+//        });
+//    }
+//};
+
 ko.bindingHandlers.datepicker = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         //initialize datepicker with some optional options

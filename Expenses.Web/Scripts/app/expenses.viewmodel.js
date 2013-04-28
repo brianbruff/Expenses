@@ -7,6 +7,9 @@
         getReport = function(expenseReportId) {
             datacontext.getExpenseReport(expenseReportId.expenseReportId, selectedReport, error);
         },
+        //submitReport = function (expenseReport) {
+        //    datacontext.submitReport(expenseReport, error);
+        //},
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();
             expenseReport.isEditing(true);
@@ -46,7 +49,8 @@
         expenseTypes: expenseTypes,
         error: error,
         addExpenseReport: addExpenseReport,
-        deleteExpenseReport: deleteExpenseReport
+        deleteExpenseReport: deleteExpenseReport,
+        //submitReport: submitReport
     };
 
 })(ko, expensesApp.datacontext);

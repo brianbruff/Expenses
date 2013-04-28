@@ -43,10 +43,6 @@
         self.saveChanges = function () {
             return datacontext.saveChangedExpense(self);
         };
-        
-        self.deleteExpense = function () {
-            return datacontext.deleteExpense(self);
-        };
 
         // Auto-save when these properties change
         self.description.subscribe(self.saveChanges);
@@ -92,8 +88,8 @@
 
         // Persisted properties
         self.expenseReportId = data.expenseReportId;
-        self.name = ko.observable(data.name || "Unsubmitted");
         self.date = ko.observable(data.date);
+        self.name = ko.observable(self.date() || "Unsubmitted");
         self.expenses = ko.observableArray(importExpenses(data.expenses));
         self.selectedExpense = ko.observable();
         self.reportVisible = ko.observable(true);
@@ -102,17 +98,31 @@
             self.reportVisible(false);
             datacontext.getExpenseImage(expense, self.selectedExpense, self.errorMessage);
         };
-        
+
         self.isSubmitted = ko.computed(function () {
             return self.date() != null;
         });
         
-            
-        
+        self.date.subscribe(function () {
+            self.name(moment(self.date()).format("DD/MM/YYYY"));
+        });
+         
+        //self.name = ko.computed(function () {
+        //    if (self.date())
+        //        return moment(self.date()).format("DD/MM/YYYY");
+                
+        //    return "Unsubmitted";
+        //});
         
         self.done = function () {
             self.reportVisible(true);
             self.selectedExpense(null);
+        };
+        
+        self.submit = function () {
+            return datacontext.submitReport(self).done(function () {
+
+            });
         };
 
         // Non-persisted properties
@@ -121,7 +131,7 @@
         self.errorMessage = ko.observable();
         // Non-persisted properties
         self.isSubmitted = ko.computed(function () {
-            return self.date !== null;
+            return self.date() !== null;
         });
 
         self.baseTotal = ko.computed(function () {
@@ -139,15 +149,14 @@
         };
 
         // Auto-save when these properties change
-        self.name.subscribe(function () {
-            return datacontext.saveChangedExpenseReport(self);
-        });
+        //self.name.subscribe(function () {
+        //    return datacontext.saveChangedExpenseReport(self);
+        //});
 
         self.toJson = function () { return ko.toJSON(self) };
     };
     // convert raw expense data objects into array of Expenses
     function importExpenses(expenses) {
-        /// <returns value="[new expense()]"></returns>
         return $.map(expenses || [],
                 function (expenseData) {
                     return datacontext.createExpense(expenseData);
@@ -172,19 +181,9 @@
             datacontext.saveNewExpense(expense);
     };
     
-    expenseReport.prototype.submit = function () {
-        //var self = this;
-        //if (self.newTodoTitle()) { // need a title to save
-        //    var expense = datacontext.createExpense(
-        //        {
-        //            description: self.description(),
-        //            expenseId: self.expenseId
-        //        });
-        //    self.expenses.push(expense);
-        //    datacontext.saveNewExpense(expense);
-        //    self.newTodoTitle("");
-        //}
-    };
+    //expenseReport.prototype.submit = function () {
+       
+    //};
     
 
     function currency(data) {

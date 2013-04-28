@@ -105,7 +105,7 @@ namespace Expenses.Web.Controllers
             uow.Commit();
 
             // Create the blank report, all new expenses are in this report
-            var report = new Model.ExpenseReport { Employee = employee, Name = "Unsubmitted" };
+            var report = new Model.ExpenseReport { Employee = employee};
             uow.ExpenseReports.Add(report);
             uow.Commit();
 
@@ -115,7 +115,7 @@ namespace Expenses.Web.Controllers
                 Properties.Resources.defaultExpense.Save(ms, ImageFormat.Jpeg);
                 image = ms.ToArray();
             }
-            var imageType = "data:image/jpeg";
+            var imageType = "data:image/jpeg;base64";
 
             // todo: remove this in production
             report.Expenses.Add(new Model.Expense

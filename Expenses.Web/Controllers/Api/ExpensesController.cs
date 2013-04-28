@@ -53,7 +53,7 @@ namespace Expenses.Web.Controllers.Api
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, dto);
         }
 
         public HttpResponseMessage PostExpense(ExpenseDto dto)
@@ -87,8 +87,7 @@ namespace Expenses.Web.Controllers.Api
             var response = Request.CreateResponse(HttpStatusCode.Created, dto);
             response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = dto.ExpenseId }));
             return response;
-
-            return Request.CreateResponse(HttpStatusCode.OK);
+            
         }
 
         public HttpResponseMessage DeleteExpense(int id)

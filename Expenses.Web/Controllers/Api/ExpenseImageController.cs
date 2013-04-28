@@ -16,8 +16,8 @@ namespace Expenses.Web.Controllers.Api
         {
 
         }
-
-        public ExpenseDto GetExpenseImage(int id)
+        
+        public HttpResponseMessage GetExpenseImage(int id)
         {
             var expense = Uow.Expenses.Include(e => e.ExpenseReport.Employee).GetById(id);
             if (expense == null)
@@ -31,11 +31,15 @@ namespace Expenses.Web.Controllers.Api
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
             }
 
-            return new ExpenseDto
+            var dto = new ExpenseDto
             {
                 Image = expense.Image,
                 ImageType = expense.ImageType
             };
+
+            var response = Request.CreateResponse(HttpStatusCode.Created, dto);
+            //response.Headers.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue { MaxAge = new System.TimeSpan(0, 10, 0) };
+            return response;
         }
 
         public HttpResponseMessage PutExpenseImage(int id, ExpenseDto dto)
@@ -101,8 +105,8 @@ namespace Expenses.Web.Controllers.Api
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
-
-            return Request.CreateResponse(HttpStatusCode.OK);
+            
+            return Request.CreateResponse(HttpStatusCode.OK, id);
         }
     }
 }

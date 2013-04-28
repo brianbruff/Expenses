@@ -16,10 +16,8 @@
         <div id="expenseReportsList" class="span3" data-bind="visible: expenseReports().length > 0">
             <ul data-bind="foreach: expenseReports">
                 <li data-bind="click: $parent.getReport, attr: { expenseReportId: expenseReportId }" style="cursor: pointer">
-                    <i class="icon-folder-open">
-                    </i>
+                    <i class="icon-folder-open"></i>
                     <span data-bind="text: name"></span>
-
                 </li>
             </ul>
         </div>
@@ -31,7 +29,9 @@
             <div data-bind="fadeSwitcher: reportVisible">
                 <div id="reportMenu">
                     <a class="icon-plus" href="#" title="New Expense" data-bind="click: newExpense"></a>
-                    <a class="icon-share-alt" href="#" title="Submit" ></a>
+                    <!-- ko ifnot isSubmitted -->
+                    <a class="icon-share-alt" href="#" title="Submit" data-bind="click: submit" ></a>
+                    <!-- /ko -->
                 </div>
                 <table id="expensesTable" class="table table-hover">
                     <thead>

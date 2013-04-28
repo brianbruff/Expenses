@@ -12,7 +12,8 @@ window.expensesApp.datacontext = (function () {
         saveChangedExpenseImage: saveChangedExpenseImage,
         saveNewExpenseReport: saveNewExpenseReport,
         saveChangedExpense: saveChangedExpense,
-        saveChangedExpenseReport: saveChangedExpenseReport,
+        //saveChangedExpenseReport: saveChangedExpenseReport,
+        submitReport: submitReport,
         deleteExpense: deleteExpense,
         deleteExpenseReport: deleteExpenseReport,
         getCurrencies: getCurrencies,
@@ -176,11 +177,21 @@ window.expensesApp.datacontext = (function () {
                 expense.errorMessage("Error updating expense item.");
             });
     }
-    function saveChangedExpenseReport(expenseReport) {
+    //function saveChangedExpenseReport(expenseReport) {
+    //    clearErrorMessage(expenseReport);
+    //    return ajaxRequest("put", expenseReportUrl(expenseReport.expenseReportId), expenseReport, "text")
+    //        .fail(function () {
+    //            expenseReport.errorMessage("Error updating the expense report.");
+    //        });
+    //}
+    
+    function submitReport(expenseReport, errorObservable) {
         clearErrorMessage(expenseReport);
-        return ajaxRequest("put", expenseReportUrl(expenseReport.expenseReportId), expenseReport, "text")
-            .fail(function () {
-                expenseReport.errorMessage("Error updating the expense report.");
+        return ajaxRequest("post", expenseReportUrl(expenseReport.expenseReportId), expenseReport)
+            .fail(function (e) {
+                errorObservable("Error updating the expense report.");
+            }).success(function(e) {
+                expenseReport.date(e.date);
             });
     }
 

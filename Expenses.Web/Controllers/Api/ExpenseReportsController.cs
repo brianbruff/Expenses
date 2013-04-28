@@ -1,4 +1,5 @@
-﻿using Expenses.Data.Contracts;
+﻿using System;
+using Expenses.Data.Contracts;
 using Expenses.Model;
 using Expenses.Web.Filters;
 using Expenses.Web.Models;
@@ -25,10 +26,21 @@ namespace Expenses.Web.Controllers.Api
                 .Select(r => new ExpenseReportDto
                 {
                     ExpenseReportId = r.Id,
-                    Name = r.Name,
+                    //Name = r.Name,
                     Date = r.Date
                 });
             return res;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage Submit(ExpenseReportDto dto)
+        {
+            var date = DateTime.Now;
+            dto.Date = date;
+
+            var response = Request.CreateResponse(HttpStatusCode.Created, dto);
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", dto));
+            return response;
         }
 
         public ExpenseReportDto GetExpenseReport(int id)
@@ -48,7 +60,7 @@ namespace Expenses.Web.Controllers.Api
             var dto = new ExpenseReportDto
                                  {
                                      ExpenseReportId = expenseReport.Id,
-                                     Name = expenseReport.Name,
+                                     //Name = expenseReport.Name,
                                      Date = expenseReport.Date,
                                      Expenses = expenseReport.Expenses.Select(e => new ExpenseDto
                                                                            {

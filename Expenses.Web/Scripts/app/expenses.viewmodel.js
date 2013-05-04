@@ -4,12 +4,9 @@
         expenseTypes = ko.observableArray(),
         error = ko.observable(),
         selectedReport = ko.observable(),
-        getReport = function(expenseReportId) {
-            datacontext.getExpenseReport(expenseReportId.expenseReportId, selectedReport, error);
+        getReport = function (expenseReport) {
+            datacontext.getExpenseReport(expenseReport, selectedReport, error);
         },
-        //submitReport = function (expenseReport) {
-        //    datacontext.submitReport(expenseReport, error);
-        //},
         addExpenseReport = function () {
             var expenseReport = datacontext.createExpenseReport();
             expenseReport.isEditing(true);

@@ -68,13 +68,15 @@ window.expensesApp.datacontext = (function () {
             errorObservable("Error retrieving expense reports.");
         }
     }
-    function getExpenseReport(expenseReportId, expenseReportObservable, errorObservable) {
-        return ajaxRequest("get", expenseReportUrl() + expenseReportId)
+    function getExpenseReport(expenseReport, expenseReportObservable, errorObservable) {
+        return ajaxRequest("get", expenseReportUrl() + expenseReport.expenseReportId)
             .done(getSucceeded)
             .fail(getFailed);
 
         function getSucceeded(data) {
-            expenseReportObservable(createExpenseReport(data));
+            var reportDetail = createExpenseReport(data);
+            expenseReportObservable(reportDetail);
+            
         }
 
         function getFailed() {

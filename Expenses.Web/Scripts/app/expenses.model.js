@@ -106,6 +106,16 @@
         self.date.subscribe(function () {
             self.name(moment(self.date()).format("DD/MM/YYYY"));
         });
+        
+        self.name.subscribe(function () {
+            var match = ko.utils.arrayFirst(window.expensesApp.ExpenseReportViewModel.expenseReports(), function (item) {
+                return self.expenseReportId === item.expenseReportId;
+            });
+
+            if (match && match.name() !== self.name())
+                match.name(self.name());
+            
+        });
          
         //self.name = ko.computed(function () {
         //    if (self.date())

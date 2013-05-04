@@ -11,35 +11,35 @@
     @Styles.Render("~/Content/themes/base/css")
     @Styles.Render("~/Content/bootstrap")
 </head>
-    <body>
-        <div id="wrap">
-            
-    
-            <div class="container">
-                <div id="userSettings">
-                          @Html.Partial("_UserSettings")
-                      </div>
-                <div id="body">
-                    @RenderBody()
-                </div>
+<body>
+    <div class="mainWrapper">
+
+        <div class="wrapper shadow">
+
+            <div id="userSettings">
+                @Html.Partial("_UserSettings")
             </div>
-            <div id="push"></div>
+            @*<div id="body">*@
+                @RenderBody()
+            @*</div>*@
         </div>
         
-        <footer>
-            <div id="footer">
-                <div class="container">
-                    <p class="muted credit">&copy; @DateTime.Now.Year - <a href="http://www.briankeating.net">www.briankeating.net</a></p>
-                </div>
+    </div>
+
+    @*<footer>
+        <div id="footer">
+            <div class="container">
+                <p class="muted credit">&copy; @DateTime.Now.Year - <a href="http://www.briankeating.net">www.briankeating.net</a></p>
             </div>
-        </footer>
-        
-        <!-- Le javascript
+        </div>
+    </footer>*@
+
+    <!-- Le javascript
             ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/ajaxlogin")
-        @RenderSection("scripts", required: false)
-    </body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/ajaxlogin")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

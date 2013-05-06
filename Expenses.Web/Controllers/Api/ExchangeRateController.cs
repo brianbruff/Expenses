@@ -1,4 +1,5 @@
-﻿using Expenses.Data.Contracts;
+﻿using System.Threading.Tasks;
+using Expenses.Data.Contracts;
 using Expenses.Web.Filters;
 using System;
 using System.Web.Http;
@@ -14,14 +15,14 @@ namespace Expenses.Web.Controllers.Api
             _currencyProvider = currencyProvider;
         }
         
-        public float Get(string baseIso, string targetIso, DateTime exchangeDate)
+        public async Task<decimal> Get(string baseIso, string targetIso, DateTime exchangeDate)
         {
             if (_currencyProvider == null)
                 return 1;
             if (string.Compare(baseIso, targetIso, System.StringComparison.OrdinalIgnoreCase) == 0)
                 return 1;
                 
-            return _currencyProvider != null ? _currencyProvider.GetExchangeRate(baseIso, targetIso, exchangeDate) : 1;
+            return _currencyProvider != null ? await _currencyProvider.GetExchangeRate(baseIso, targetIso, exchangeDate) : 1;
         }
 
 

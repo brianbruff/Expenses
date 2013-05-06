@@ -8,6 +8,6 @@ namespace Expenses.Data.Contracts
 {
     public interface ICurrencyProvider
     {
-        float GetExchangeRate(string baseCurrency, string targetCurrency, DateTime day);
+        Task<decimal> GetExchangeRate(string fromCurrency, string targetCurrency, DateTime day);
     }
 }

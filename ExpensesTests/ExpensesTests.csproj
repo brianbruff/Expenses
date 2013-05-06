@@ -73,10 +73,15 @@
     <Compile Include="BasicContentInitializer.cs" />
     <Compile Include="CurrenciesControllerTest.cs" />
     <Compile Include="DatabaseTests.cs" />
+    <Compile Include="ExchangeRates\Ecb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExpenseControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Expenses.CurrencyProviders\Expenses.CurrencyProviders.csproj">
+      <Project>{e0ae6416-fa38-4cff-abcc-b19017f9db12}</Project>
+      <Name>Expenses.CurrencyProviders</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Expenses.Data.Contracts\Expenses.Data.Contracts.csproj">
       <Project>{984ad243-1096-4fd2-a516-aafdce43e671}</Project>
       <Name>Expenses.Data.Contracts</Name>

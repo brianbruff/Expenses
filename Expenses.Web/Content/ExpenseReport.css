@@ -45,6 +45,10 @@ height: 100%;
   box-shadow:         0px 0px 35px #444;
 }
 
+#reportDetails {
+    visibility:hidden;
+}
+
 
 #header {
 	height:190px;

@@ -11,10 +11,10 @@
             <summary>Initializes a new instance of type StubICurrencyProvider</summary>
         </member>
         <member name="M:Expenses.Data.Contracts.Fakes.StubICurrencyProvider.edc::Expenses#Data#Contracts#ICurrencyProvider#GetExchangeRate(System.String,System.String,System.DateTime)">
-            <summary>Sets the stub of ICurrencyProvider.GetExchangeRate(String baseCurrency, String targetCurrency, DateTime day)</summary>
+            <summary>Sets the stub of ICurrencyProvider.GetExchangeRate(String fromCurrency, String targetCurrency, DateTime day)</summary>
         </member>
         <member name="F:Expenses.Data.Contracts.Fakes.StubICurrencyProvider.GetExchangeRateStringStringDateTime">
-            <summary>Sets the stub of ICurrencyProvider.GetExchangeRate(String baseCurrency, String targetCurrency, DateTime day)</summary>
+            <summary>Sets the stub of ICurrencyProvider.GetExchangeRate(String fromCurrency, String targetCurrency, DateTime day)</summary>
         </member>
         <member name="T:Expenses.Data.Contracts.Fakes.StubIExpensesUow">
             <summary>Stub type of Expenses.Data.Contracts.IExpensesUow</summary>

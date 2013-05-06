@@ -81,7 +81,7 @@ namespace Expenses.Web.Controllers.Api
             }
             catch (Exception exp)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, exp.Message);
             }
 
             var response = Request.CreateResponse(HttpStatusCode.Created, dto);
